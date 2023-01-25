@@ -3,3 +3,45 @@
     font-size: 18px;
     font-style: italic;
 }
+
+.background {
+    background: #141E30;
+    background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+    background: linear-gradient(-45deg, #35577D, #141E30);
+
+    margin: 0;
+    padding: 0;
+}
+
+.white {
+    color: #FFF;
+    padding-top: 0;
+    width: 100%;
+}
+
+.pc20 {
+    font-size: 20px;
+}
+
+.center {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+img.rounded {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+img.round {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
