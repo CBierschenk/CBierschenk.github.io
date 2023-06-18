@@ -1,0 +1,78 @@
+:root {
+  --color-primary: #5ec576;
+  --color-secondary: #ffcb03;
+  --color-tertiary: #ff585f;
+  --color-primary-darker: #66ff66;
+  --color-secondary-darker: #ffbb00;
+  --color-tertiary-darker: #fd424b;
+  --color-primary-opacity: #262525;
+  --color-secondary-opacity: #ffcd0331;
+  --color-tertiary-opacity: #ff58602d;
+  --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+  --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lucida", monospace;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.9;
+  background-color: #f9f7f8;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+.blur {
+  filter: blur(5px);
+}
+
+.hide {
+  display: none;
+}
+
+.layerPosition00 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.overlay {
+  background-color: var(--color-primary-opacity);
+  color: var(--color-primary-darker);
+  text-align: center;
+  padding-top: 30vh;
+}
+
+.overlayButton {
+  outline-offset: 10px;
+  background-color: #f9f7f8;
+}
+
+.round {
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 50%;
+}
+
+.space {
+  padding-bottom: 7.5%;
+}
