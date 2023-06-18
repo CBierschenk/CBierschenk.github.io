@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" type="image/png" href="img/icon.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css" />
     <title>Who Is Constantin?</title>
   </head>
@@ -32,7 +30,7 @@
     </div>
     <!--Header contains my navigation a switching foto left and the title right whith emphasing my name, -->
     <div class="layerPosition00">
-      <header>
+      <header class="sectionSpace">
         <nav class="navigation">
             <li class="navigationLink" ><a>About</a></li>
             <li class="navigationLink"><a>Abilities</a></li>
@@ -40,18 +38,27 @@
             <li class="navigationLink"><a>Blogs</a></li>
         </nav>
         <!--Icons to other stuff (github, linkedIn, HackerRank)-->
-        <div id="wrapper">
+        <button class="btn btn-primary whoBtn" id="flex" type="button">
+          <i style="font-size: 92px;" class="bi bi-question-lg"></i>
+          <div>
+            <h1 class="title">Who is</h1>
+            <h1 class="title">Constantin</h1>
+          </div>
+          <i style="font-size: 92px;" class="bi bi-question-lg"></i>
+        </button>
+        <div id="wrapper" class="blur">
             <div  id="first">
                 <img src="./dummy.jpeg" class="center spaceTop">
             </div>
-            <div id="second">
-                <h1 class="title">Who is</h1>
-                <h1 class="title">Constantin</h1>
-                <h1 class="title">?</h1>
+            <div id="second" class="spaceTop2x">
+              
+              <div class="shortAbout spaceTop">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              </div>
             </div>
         </div>
       </header>
-      <!--First section "About": left short text, right photo from myself -->
+      <!--First section "About": centered image with source to other stuff around -->
       <section class="sectionSpace">
         <h1>About</h1>
       </section>
@@ -59,7 +66,7 @@
       <section class="sectionSpace">
         <h1>Abilities</h1>
       </section>
-      <!--Third section "Projects": Project Selection, Popup with project-->
+      <!--Third section "Projects": Project Selection (clickable ov image which will open more infos), Popup with project-->
       <section class="sectionSpace">
         <h1>Projects</h1>
       </section>
@@ -74,5 +81,6 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
