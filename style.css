@@ -35,6 +35,11 @@ h1 {
   font-size: 48px;
 }
 
+h1.title {
+  font-size: 96px;
+  text-align: center;
+}
+
 .blur {
   filter: blur(5px);
 }
@@ -51,14 +56,21 @@ h1 {
   right: 0;
 }
 
-.overlay {
+.questionPower {
   background-color: var(--color-primary-opacity);
   color: var(--color-primary-darker);
   text-align: center;
   padding-top: 30vh;
 }
 
-.overlayButton {
+.loadingBar {
+  background-color: var(--color-primary-opacity);
+  color: var(--color-primary-darker);
+  text-align: center;
+  padding-top: 50vh;
+}
+
+.powerButtonOutline {
   outline-offset: 10px;
   background-color: #f9f7f8;
 }
@@ -73,6 +85,97 @@ h1 {
   border-radius: 50%;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 .space {
-  padding-bottom: 7.5%;
+  padding-bottom: 7.5vh;
+}
+
+.spaceTop {
+  padding-top: 5vh;
+}
+.sectionSpace {
+  padding-bottom: 20vh;
+}
+
+#myProgress {
+  width: 75%;
+  margin: auto;
+  background-color: white;
+  position: relative;
+}
+
+#myBar {
+  width: 0.5%;
+  height: 30px;
+  background-color: var(--color-primary-darker);
+}
+
+.navigation {
+  background-color: var(--color-primary-opacity);
+  margin: auto;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right: 1px solid var(--color-primary-darker);
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: var(--color-primary-darker);
+}
+
+#wrapper {
+  width: 100%;
+  border: 1px solid black;
+  overflow: hidden; /* add this to contain floated children */
+}
+#first {
+  width: 50%;
+  height: 100vh;
+  float: left; /* add this */
+  border: 1px solid red;
+}
+#second {
+  width: 45%;
+  margin: auto;
+  border: 1px solid green;
+  float: left; /* add this */
+}
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
 }

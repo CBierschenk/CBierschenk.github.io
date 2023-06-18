@@ -14,39 +14,55 @@
   </head>
   <body>
     <!--Overlay div covering infos until restarting the computer-->
-    <div class="startingOverlay layerPosition00 overlay">
+    <div class="startingOverlay layerPosition00 questionPower hide">
       <div>
         <h1 class="space">Have you tried turning it off and on again?</h1>
-        <button class="overlayButton round">
+        <button class="powerButtonOutline round">
           <i style="font-size: 192px; color: red" class="fa">&#xf011; </i>
         </button>
       </div>
     </div>
-    <div class="startingOverlay layerPosition00 overlay hide">
-      <p class="">Loading bar</p>
+    <div class="startingOverlay layerPosition00 loadingBar hide">
+      <p>Loading..</p>
+      <div id="myProgress">
+        <div id="myBar">
+          <p class="center">0%</div>
+        </div>
+      </div>
     </div>
     <!--Header contains my navigation a switching foto left and the title right whith emphasing my name, -->
-    <div class="layerPosition00 hide">
+    <div class="layerPosition00">
       <header>
-        <nav>
-          <ul>
-            <li>About</li>
-            <li>Professional Experience</li>
-            <li>Projects</li>
-            <li>Blogs</li>
-          </ul>
+        <nav class="navigation">
+            <li class="navigationLink" ><a>About</a></li>
+            <li class="navigationLink"><a>Abilities</a></li>
+            <li class="navigationLink"><a>Projects</a></li>
+            <li class="navigationLink"><a>Blogs</a></li>
         </nav>
         <!--Icons to other stuff (github, linkedIn, HackerRank)-->
-        <div>
-          <h1>Who is Connstantin?</h1>
+        <div id="wrapper">
+            <div  id="first">
+                <img src="./dummy.jpeg" class="center spaceTop">
+            </div>
+            <div id="second">
+                <h1 class="title">Who is</h1>
+                <h1 class="title">Constantin</h1>
+                <h1 class="title">?</h1>
+            </div>
         </div>
       </header>
-
       <!--First section "About": left short text, right photo from myself -->
-      <section></section>
+      <section class="sectionSpace">
+        <h1>About</h1>
+      </section>
       <!--Second section "Professional Experience": Timeline with clickable dates for more info (pop/up), below two diagramms: first bar chart showing hard skills, second pie chart softskills-->
-      <section></section>
+      <section class="sectionSpace">
+        <h1>Abilities</h1>
+      </section>
       <!--Third section "Projects": Project Selection, Popup with project-->
+      <section class="sectionSpace">
+        <h1>Projects</h1>
+      </section>
       <footer>
         <div>
           <h2>Blog</h2>
