@@ -37,6 +37,7 @@ body {
 
 h1 {
   font-size: 48px;
+  padding-left: 2.5vh;
 }
 
 h1.title {
@@ -75,6 +76,13 @@ h1.title.right {
   right: 0;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
 .questionPower {
   background-color: var(--color-primary-opacity);
   color: var(--color-primary-darker);
@@ -106,8 +114,7 @@ h1.title.right {
 
 .center {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   width: 50%;
 }
 
@@ -122,7 +129,7 @@ h1.title.right {
   padding-top: 10vh;
 }
 .sectionSpace {
-  padding-bottom: 20vh;
+  padding-bottom: 10vh;
 }
 
 #myProgress {
@@ -185,7 +192,7 @@ li a:hover {
 }
 #first {
   width: 50%;
-  height: 65vh;
+  height: 85vh;
   float: left; /* add this */
   border: 1px solid red;
 }
@@ -204,13 +211,16 @@ img.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 85%;
 }
 
-.shortAbout {
-  margin: 4.5vh;
+.shortText {
   font-size: 18px;
   text-align: justify;
+  margin: 2vh;
+  padding: 2vh;
+  border: 1px dotted #111;
+  border-radius: 5%;
 }
 
 .whoBtn {
@@ -218,4 +228,51 @@ img.center {
   margin-left: auto;
   margin-right: auto;
   width: auto;
+}
+
+.featureButton {
+  background-color: #39b385;
+  color: #444;
+  border: #111;
+  padding: 5px;
+  margin: 1vh;
+  font-size: 31px;
+  box-shadow: 0 2px 4px darkslategray;
+  height: 10vh;
+  width: 10vh;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.featureButton.active {
+  background-color: #fd424b;
+  box-shadow: 0 0px 2px darkslategray;
+  transition: translateY(2px);
+}
+
+.round70 {
+  border-radius: 70%;
+}
+
+.textContainer {
+  float: both;
+  height: 40vh;
+}
+.buttonContainer {
+  float: both;
+  height: 15vh;
+}
+hr {
+  border: none;
+  height: 200px;
+  width: 97.5%;
+  margin: auto;
+  /* Set the hr color */
+  color: #333; /* old IE */
+  background-color: #333; /* Modern Browsers */
+}
+
+img.project {
+  width: 20%;
+  border-radius: 30%;
 }
