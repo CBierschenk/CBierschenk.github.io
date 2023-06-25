@@ -12,106 +12,111 @@
   </head>
   <body>
     <!--Overlay div covering infos until restarting the computer-->
-    <div class="startingOverlay layerPosition00 questionPower hide">
+    <div class="containter-overlay-pages design-prequal hide">
       <div>
         <h1 class="space">Have you tried turning it off and on again?</h1>
-        <button class="powerButtonOutline round">
-          <i style="font-size: 192px; color: red" class="fa">&#xf011; </i>
+        <button class="power-button">
+          <i class="bi bi-power"></i>
         </button>
       </div>
     </div>
-    <div class="startingOverlay layerPosition00 loadingBar hide">
+    <div class="containter-overlay-pages design-prequal loading-bar hide">
       <p>Loading..</p>
-      <div id="myProgress">
-        <div id="myBar">
+      <div id="container-progress">
+        <div id="progress-bar">
           <p class="center">0%</div>
         </div>
       </div>
     </div>
     <!--Header contains my navigation a switching foto left and the title right whith emphasing my name, -->
-    <div class="layerPosition00">
-      <header class="sectionSpace">
+    <div class="containter-overlay-pages">
+      <header class="section-space">
         <nav class="navigation">
-            <li class="navigationLink"><a>Experience</a></li>
-            <li class="navigationLink"><a>Projects</a></li>
-            <li class="navigationLink"><a>Blogs</a></li>
+            <li><a>Experience</a></li>
+            <li><a>Projects</a></li>
+            <li><a>Blogs</a></li>
         </nav>
         <!--Icons to other stuff (github, linkedIn, HackerRank)-->
         <div id="wrapper" >
             <div  id="first">
-                <img src="./dummy.jpeg" class="center spaceTop">
+                <img src="./dummy.jpeg" class="center space-top">
             </div>
-            <div id="second" class="spaceTop2x">
+            <div id="second" class="space-top-2x">
               <div class="center">
-                <button class="featureButton active round70">
+                <button class="feature-button active round-70">
                   <i class="bi bi-person-bounding-box"></i>
                 </button>
-                <button class = "featureButton round70">
+                <button class = "feature-button round-70">
                   <i class="bi bi-airplane"></i>
                 </button>
-                <button class="featureButton round70">
+                <button class="feature-button round-70">
                   <i class="bi bi-joystick"></i>
                 </button>
               </div>
-              <div class="textContainer relative">
-                <div class="shortText absolute">
+              <div class="text-container relative">
+                <div class="short-text absolute">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <div class="shortText absolute"> 
+                <div class="short-text absolute"> 
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <div class="shortText absolute">
+                <div class="short-text absolute">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
               </div>
-              <div class="buttonContainer center">
-                <button class="featureButton active round70">
-                  <i class="bi bi-person-bounding-box"></i>
+              <div class="center">
+                <button class="feature-button active round-70">
+                  <i class="bi bi-github"></i>
                 </button>
-                <button class = "featureButton round70">
-                  <i class="bi bi-airplane"></i>
+                <button class = "feature-button round-70">
+                  <i class="bi bi-linkedin"></i>
                 </button>
-                <button class="featureButton round70">
-                  <i class="bi bi-joystick"></i>
+                <button class="feature-button round-70">
+                  <i class="bi bi-github"></i>
                 </button>
               </div>
             </div>
           </div>
       </header>
-      <!--Second section "Professional Experience": Timeline with clickable dates for more info (pop/up), below two diagramms: first bar chart showing hard skills, second pie chart softskills-->
-      <section class="sectionSpace">
-        <h1>Experience</h1>
-        <!--Interactive slider-->
-        <div class="relative">
-          <hr class="timeline">
-        </div>
-        <!--Interactive feature elements-->
-        <div class="relative">
-          <div class="absolute shortText">F1</div>
-          <div class="absolute shortText">F2</div>
-          <div class="absolute shortText">F3</div>
-        </div>
-      </section>
+      <!--Second section "Life": Timeline or something is this direction. COMING SOON -->
+      <!--section class="section-space"-->
+        <!--h1>Life</h1-->
+      <!--/section-->
+      <!--Second section "Skills": No idea yet. COMING SOON-->
+      <!--section class="section-space"-->
+        <!--h1>Skills</h1-->
+      <!--/section-->
       <!--Third section "Projects": Project Selection (clickable ov image which will open more infos), Popup with project-->
-      <section class="sectionSpace">
+      <section class="section-space">
         <h1>Projects</h1>
-        <div class="center">
-          <h3>Project Title</h3>
-          <div><img class="project" src="./dummy.jpeg"></div>
-          <button>Link to project</button>
+        <div class="container-projects">
+          <div class="single-project">
+            <h3>Project Title</h3>
+            <div>
+              <img class="project" src="./dummy.jpeg">
+            </div>
+            <button>Link to project</button>
+          </div>
         </div>
-        <div class="center">
-          Project window
+        <div class="relative">
+          <div class="absolute center">
+            Project window I
+          </div>
+        </div>
+        <div class="relative hide">
+          <div class="absolute center">
+            Project window II
+          </div>
         </div>
       </section>
       <footer>
-        <div>
-          <h2>Blog</h2>
-        </div>
-        <div>
-          <p>Name</p>
-          <p>E-Mail</p>
-          <p>Social Media</p>
+        <div class="container">
+          <h2 class="container-element">Blog</h2>
+          <div class="container-element">
+            <p>Name</p>
+            <p>E-Mail</p>
+            <p>Social Media</p>
+          </div>
         </div>
       </footer>
     </div>
