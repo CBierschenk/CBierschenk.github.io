@@ -12,17 +12,19 @@
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
 }
 
+/* Settings for all elements
 * {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
-}
-
+  /*box-sizing: inherit*/
+/* 
 html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
+*/
 
+/* Body styling*/
 body {
   font-family: "Lucida", monospace;
   font-weight: 300;
@@ -36,39 +38,29 @@ body {
   overflow-x: hidden;
 }
 
+/* Header styling*/
 h1 {
   font-size: 48px;
   padding-left: 2.5vh;
 }
 
+/* Special styling for title h1 headers*/
 h1.title {
   font-size: 72px;
   line-height: 72px;
 }
-h1.title.inline {
-  display: inline;
-}
 
-h1.title.center {
-  text-align: center;
-}
-
-h1.title.left {
-  text-align: left;
-}
-
-h1.title.right {
-  text-align: right;
-}
-
+/* Blur class used for js actions */
 .blur {
   filter: blur(10px);
 }
 
+/* Hide class to hide elements used for js actions*/
 .hide {
   display: none;
 }
 
+/*
 .containter-pages {
   position: absolute;
   top: 0;
@@ -77,6 +69,7 @@ h1.title.right {
   right: 0;
   min-height: 100vh;
 }
+*/
 
 .absolute {
   position: absolute;
@@ -190,19 +183,16 @@ li a:hover {
 #wrapper {
   width: 95%;
   margin: 2.5%;
-  border: 1px solid black;
   overflow: hidden; /* add this to contain floated children */
 }
 #first {
   width: 50%;
   height: 85vh;
   float: left; /* add this */
-  border: 1px solid red;
 }
 #second {
   width: 50%;
   margin: auto;
-  border: 1px solid green;
   float: left; /* add this */
 }
 
@@ -222,8 +212,9 @@ img.center {
   text-align: justify;
   margin: 2vh;
   padding: 2vh;
-  border: 1px dotted #111;
-  border-radius: 5%;
+  border: 2px solid #111;
+  border-radius: 15% 15%;
+  box-shadow: 10px 5px 5px blue;
 }
 
 .feature-button {
@@ -233,7 +224,7 @@ img.center {
   padding: 5px;
   margin: 1vh;
   font-size: 32px;
-  box-shadow: 0 2px 4px darkslategray;
+  box-shadow: 2px 2px 2px darkslategray;
   height: 10vh;
   width: 10vh;
   cursor: pointer;
@@ -294,27 +285,90 @@ img.footer {
   margin: auto;
 }
 
-ul.timeline {
-  column-gap: 2rem;
-  row-gap: 2rem;
-  width: min(75rem, 90%);
-  display: grid;
-  grid-template-columns: 1rem 1fr;
-  grid-auto-columns: max-content;
-  list-style: none;
-  margin-inline: auto;
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-ul.timeline::before {
+.timeline::after {
   content: "";
-  grid-column: 1;
-  grid-row: 1 / span 20;
-  background: rgb(225, 225, 225);
-  border-radius: calc(var(--line-w) / 2);
+  position: absolute;
+  width: 6px;
+  background-color: #39b385;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+}
+
+.container-timeline {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+.container-timeline::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #f9f7f8;
+  border: 4px solid #ff585f;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+  right: -16px;
+}
+
+.left {
+  left: 0;
+}
+
+.left::before {
+  content: "";
+  height: 0;
+  position: absolute;
+  top: 18px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent red;
+}
+
+.right {
+  left: 50%;
+}
+
+.right::before {
+  content: "";
+  height: 0;
+  position: absolute;
+  top: 18px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent red transparent transparent;
+}
+
+.right::after {
+  left: -9px;
+}
+
+.content-timeline {
+  padding: 20px 30px;
+  background-color: #f9f7f8;
+  position: relative;
+  border-radius: 6px;
 }
 
 footer {
   background: var(--color-primary-opacity);
+  padding: 10px;
   height: auto;
   width: 100%;
   display: inline-block;
