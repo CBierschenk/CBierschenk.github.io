@@ -1,3 +1,4 @@
+/* ==> := section comment, which provide info about subsequent styling*/
 :root {
   --color-primary: #5ec576;
   --color-secondary: #ffcb03;
@@ -12,19 +13,19 @@
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
 }
 
-/* Settings for all elements
+/* Settings for all elements */
 * {
   margin: 0;
   padding: 0;
-  /*box-sizing: inherit*/
-/* 
+  box-sizing: inherit;
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
-*/
 
-/* Body styling*/
+/* Body styling */
 body {
   font-family: "Lucida", monospace;
   font-weight: 300;
@@ -38,13 +39,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Header styling*/
+/* Header styling */
 h1 {
   font-size: 48px;
   padding-left: 2.5vh;
 }
 
-/* Special styling for title h1 headers*/
+/* Special styling for title h1 headers */
 h1.title {
   font-size: 72px;
   line-height: 72px;
@@ -55,13 +56,13 @@ h1.title {
   filter: blur(10px);
 }
 
-/* Hide class to hide elements used for js actions*/
+/* Hide class to hide elements used for js actions */
 .hide {
   display: none;
 }
 
-/*
-.containter-pages {
+/* Overlay pages container class to stack multiple layer of pages */
+.containter-overlay-pages {
   position: absolute;
   top: 0;
   left: 0;
@@ -69,15 +70,18 @@ h1.title {
   right: 0;
   min-height: 100vh;
 }
-*/
 
+/* Absolute class to set absolute positioning */
 .absolute {
   position: absolute;
 }
 
+/* Relative class to set relative positioning */
 .relative {
   position: relative;
 }
+
+/* Prequal class for overlay pages */
 .design-prequal {
   background-color: var(--color-primary-opacity);
   color: var(--color-primary-darker);
@@ -86,10 +90,12 @@ h1.title {
   padding-top: 30vh;
 }
 
+/* Spacing for the loading bar */
 .loading-bar {
   padding-top: 50vh;
 }
 
+/* Power button styling */
 .power-button {
   outline-offset: 5px;
   background-color: #f9f7f8;
@@ -98,36 +104,33 @@ h1.title {
   border-radius: 15%;
 }
 
-.round {
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 50%;
-}
-
+/* Class to center elements */
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Class to add spacing (only used Turn of on question) */
 .space {
   padding-bottom: 7.5vh;
 }
 
+/* Class to add spacing (img top element) */
 .space-top {
   padding-top: 5vh;
 }
+/* Class to add spacing (right text top element) */
 .space-top-2x {
   padding-top: 10vh;
 }
+
+/* Class to add constance space after sections */
 .section-space {
   padding-bottom: 10vh;
 }
 
+/* ==> Progress bar styling */
 #container-progress {
   width: 75%;
   margin: auto;
@@ -141,6 +144,14 @@ h1.title {
   background-color: var(--color-primary-darker);
 }
 
+#progress {
+  position: absolute;
+  width: 100%;
+  margin: auto;
+  color: green;
+}
+
+/* ==> Navigation bar styling */
 .navigation {
   background-color: var(--color-primary-opacity);
   margin: auto;
@@ -176,14 +187,11 @@ li a:hover {
   background-color: #111;
 }
 
-.active {
-  background-color: var(--color-primary-darker);
-}
-
+/* ==> Wrapper id and children (first, second) to design center seperated section */
 #wrapper {
   width: 95%;
   margin: 2.5%;
-  overflow: hidden; /* add this to contain floated children */
+  overflow: hidden;
 }
 #first {
   width: 50%;
@@ -196,10 +204,7 @@ li a:hover {
   float: left; /* add this */
 }
 
-#flex {
-  display: flex;
-}
-
+/* Class to center images */
 img.center {
   display: block;
   margin-left: auto;
@@ -207,6 +212,7 @@ img.center {
   width: 85%;
 }
 
+/* Style for short text */
 .short-text {
   font-size: 18px;
   text-align: justify;
@@ -217,6 +223,7 @@ img.center {
   box-shadow: 10px 5px 5px blue;
 }
 
+/* Style feature bottons (bottons to switch text) */
 .feature-button {
   background-color: #39b385;
   color: #444;
@@ -231,39 +238,27 @@ img.center {
   transition: all 0.2s ease;
 }
 
+/* Styling active feature button */
 .feature-button.active {
   background-color: #fd424b;
   box-shadow: 0 0px 2px darkslategray;
   transition: translateY(2px);
 }
 
+/* Adding border radius 70% to element */
 .round-70 {
   border-radius: 70%;
 }
 
+/* Styling feature text container */
 .text-container {
   float: both;
   height: 40vh;
 }
 
-hr {
-  border: none;
-  height: 200px;
-  width: 97.5%;
-  margin: auto;
-  /* Set the hr color */
-  color: #333; /* old IE */
-  background-color: #333; /* Modern Browsers */
-}
-
+/* ==> Project section styling elements*/
 img.project {
   width: 25vh;
-  border-radius: 30%;
-}
-
-img.footer {
-  padding: 5px;
-  width: 10vh;
   border-radius: 30%;
 }
 
@@ -285,12 +280,15 @@ img.footer {
   margin: auto;
 }
 
+/* ==> Education section styling elements (timeline)*/
+/* Container of timeline */
 .timeline {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Actual position and style of timeline (the line) */
 .timeline::after {
   content: "";
   position: absolute;
@@ -301,6 +299,7 @@ img.footer {
   left: 50%;
 }
 
+/* container of the timeline content*/
 .container-timeline {
   padding: 10px 40px;
   position: relative;
@@ -308,6 +307,7 @@ img.footer {
   width: 50%;
 }
 
+/* markers on timeline relative to container */
 .container-timeline::after {
   content: "";
   position: absolute;
@@ -325,6 +325,7 @@ img.footer {
   left: 0;
 }
 
+/* Arrows to the right */
 .left::before {
   content: "";
   height: 0;
@@ -342,6 +343,7 @@ img.footer {
   left: 50%;
 }
 
+/* Arrows to the left */
 .right::before {
   content: "";
   height: 0;
@@ -355,10 +357,12 @@ img.footer {
   border-color: transparent red transparent transparent;
 }
 
+/* Correcting the marker for right sided content */
 .right::after {
   left: -9px;
 }
 
+/* Actual content styling */
 .content-timeline {
   padding: 20px 30px;
   background-color: #f9f7f8;
@@ -366,6 +370,7 @@ img.footer {
   border-radius: 6px;
 }
 
+/* ==> Footer styling */
 footer {
   background: var(--color-primary-opacity);
   padding: 10px;
@@ -388,6 +393,7 @@ footer {
 p {
   font-size: 16px;
 }
+
 h2.footer {
   text-align: center;
   font-size: 24px;
@@ -396,4 +402,10 @@ h2.footer {
 .vl {
   border-left: 6px solid green;
   height: 50px;
+}
+
+img.footer {
+  padding: 5px;
+  width: 10vh;
+  border-radius: 30%;
 }
