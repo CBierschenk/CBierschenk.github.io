@@ -4,47 +4,62 @@
 const ON_OFF = 0;
 const LOADING = 1;
 const MAIN = 2;
+const LOADING_BAR_TICKS = 100;
 
 // === DOM-Element Selection ===
 const powerButton = document.querySelector(".power-button");
 const overlayedPages = document.getElementsByClassName(
   "containter-overlay-pages"
 );
-console.log(powerButton);
-console.log(overlayedPages);
-console.log(overlayedPages[ON_OFF]);
+const onOffContainer = document.querySelector(".on-off-container");
+const loadingContainer = document.querySelector(".container-loading");
+const progressCount = document.querySelector("#progress");
+const progressBar = document.querySelector("#progress-bar");
 
 // === Callbacks ===
-const switchOverlayPage = function (layerTurnOff, layerTurnOn, intervalTime) {
-  overlayedPages[layerTurnOn].style.opacity = 0;
-  overlayedPages[layerTurnOn].classList.remove("hide");
-  let invterval = 5;
-  let vanishPage = setInterval(() => {
-    overlayedPages[layerTurnOff].style.opacity = `${10 / invterval}`;
-    overlayedPages[layerTurnOff].style.webkitFilter = `blur(${
-      10 - invterval
-    }px)`;
-    overlayedPages[layerTurnOn].style.opacity = `${1 / invterval}`;
-    invterval--;
-    if (invterval < 0) {
-      clearInterval(vanishPage);
-      overlayedPages[layerTurnOff].classList.add("hide");
-      invterval = 5;
-      let blurInterval = setInterval(() => {
-        overlayedPages[layerTurnOff].style.opacity = `${10 / invterval}`;
-        overlayedPages[layerTurnOn].style.webkitFilter = `blur(${invterval}px)`;
-        invterval--;
-        if (invterval < 0) {
-          clearInterval(blurInterval);
-          overlayedPages[layerTurnOn].classList.remove("blur");
-          overlayedPages[layerTurnOff].classList.add("hide");
-        }
-      }, intervalTime);
-    }
-  }, intervalTime);
+const progressLoadingBar = function (loadingTicks) {
+  let loadingPercentige = LOADING_BAR_TICKS - loadingTicks;
+  progressBar.style.width = `${loadingPercentige}%`;
+  progressCount.innerText = `${loadingPercentige}%`;
 };
 
 // === Event-Listener ===
-powerButton.addEventListener("click", () =>
-  switchOverlayPage(ON_OFF, LOADING, 100)
-);
+/* 
+The click on the button starts the nested prequel sequence. The different stages are:
+1. Event button clicked -> adds drop css class, queries added drop class and ands a event listener to react on end
+2. Event drop animation ends -> adds the lr-slide css class to the loading container, toggels hide styles, queries slide animation and uses this to trigger the next event
+3. Event lr-slide ends -> set interval to animate loading bar (could replaced by css webkit animation)
+4. End of loading interval -> set interval to unblur main page.
+*/
+powerButton.addEventListener("click", () => {
+  onOffContainer.classList.add("drop");
+  const dropAnimation = document.querySelector(".drop");
+  dropAnimation.addEventListener("animationend", () => {
+    loadingContainer.classList.add("lr-slide");
+    overlayedPages[ON_OFF].classList.add("hide");
+    overlayedPages[LOADING].classList.remove("hide");
+    const slideAnimation = document.querySelector(".lr-slide");
+    slideAnimation.addEventListener("animationend", () => {
+      let loadingTicks = LOADING_BAR_TICKS;
+      const loadingInterval = setInterval(() => {
+        progressLoadingBar(loadingTicks);
+        if (!loadingTicks) {
+          clearInterval(loadingInterval);
+          overlayedPages[LOADING].classList.add("hide");
+          overlayedPages[MAIN].classList.remove("hide");
+          let unblurTicks = 5;
+          const unblurInterval = setInterval(() => {
+            overlayedPages[MAIN].style.webkitFilter = `blur(${
+              unblurTicks - 1
+            }px)`;
+            unblurTicks--;
+            if (!unblurTicks) {
+              clearInterval(unblurInterval);
+            }
+          }, 100);
+        }
+        loadingTicks--;
+      }, 50);
+    });
+  });
+});

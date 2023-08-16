@@ -88,6 +88,7 @@ h1.title {
   text-align: center;
   min-height: 100vh;
   padding-top: 30vh;
+  overflow-y: hidden;
 }
 
 /* Spacing for the loading bar */
@@ -139,7 +140,7 @@ h1.title {
 }
 
 #progress-bar {
-  width: 0.5%;
+  width: 0%;
   height: 30px;
   background-color: var(--color-primary-darker);
 }
@@ -408,4 +409,99 @@ img.footer {
   padding: 5px;
   width: 10vh;
   border-radius: 30%;
+}
+
+/* ==> Animations */
+
+/* Shake animation*/
+@keyframes shake {
+  0% {
+    -webkit-transform: translate(2px, 1px) rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    -webkit-transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    -webkit-transform: translate(0px, 2px) rotate(0deg);
+  }
+  40% {
+    -webkit-transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    -webkit-transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    -webkit-transform: translate(2px, 1px) rotate(-1deg);
+  }
+  80% {
+    -webkit-transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    -webkit-transform: translate(2px, 2px) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+.shake:hover {
+  animation-name: shake;
+  animation-duration: 0.5s;
+  transform-origin: 50% 50%;
+  animation-iteration-count: infinite;
+}
+.shake {
+  display: inline-block;
+}
+
+/*Three point drop*/
+/* Shake animation*/
+@keyframes three-point-drop {
+  30% {
+    -webkit-transform: translate(0px, 10vh) rotate(20deg) translate(0px, 20vh);
+  }
+  60% {
+    -webkit-transform: translate(-180px, 20vh) rotate(-20deg)
+      translate(0px, 70vh);
+  }
+  90% {
+    -webkit-transform: translate(0px, 90vh) rotate(10deg);
+  }
+  100% {
+    -webkit-transform: translate(0px, 120vh) rotate(0deg);
+  }
+}
+
+.drop {
+  animation-name: three-point-drop;
+  animation-duration: 5s;
+  transform-origin: 50% 50%;
+  animation-iteration-count: 1;
+}
+
+@keyframes left-right-slide-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  30% {
+    transform: translateX(25%);
+  }
+  60% {
+    transform: translateX(-12.5%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.lr-slide {
+  animation-name: left-right-slide-in;
+  animation-duration: 5s;
+  transform-origin: -50% 50%;
+  animation-iteration-count: 1;
 }
