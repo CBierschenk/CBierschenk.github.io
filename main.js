@@ -47,7 +47,7 @@ powerButton.addEventListener("click", () => {
           clearInterval(loadingInterval);
           overlayedPages[LOADING].classList.add("hide");
           overlayedPages[MAIN].classList.remove("hide");
-          let unblurTicks = 5;
+          let unblurTicks = 10;
           const unblurInterval = setInterval(() => {
             overlayedPages[MAIN].style.webkitFilter = `blur(${
               unblurTicks - 1
@@ -62,4 +62,21 @@ powerButton.addEventListener("click", () => {
       }, 50);
     });
   });
+});
+
+// Navigation Bar (Lazy scrolling)
+document.querySelector(".navi-links").addEventListener("click", function (e) {
+  e.preventDefault();
+  let eventTarget = e.target;
+  if (eventTarget.classList.contains("bi")) {
+    eventTarget = e.target.parentElement;
+  }
+  if (eventTarget.classList.contains("navi-link")) {
+    if (eventTarget.classList.contains("extern")) {
+      window.open(eventTarget.getAttribute("href"));
+    } else {
+      const id = eventTarget.getAttribute("href");
+      document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+    }
+  }
 });

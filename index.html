@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous" defer></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"
+    defer
+  ></script>
   <script src="./main.js" defer></script>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" type="image/png" href="img/icon.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Who Is Constantin?</title>
   </head>
@@ -16,7 +29,9 @@
     <!--Overlay div covering infos until restarting the computer-->
     <div class="containter-overlay-pages design-prequal">
       <div class="on-off-container">
-        <h1 class="space on-off-text">Have you tried turning it off and on again?</h1>
+        <h1 class="space on-off-text">
+          Have you tried turning it off and on again?
+        </h1>
         <button class="power-button shake">
           <i class="bi bi-power"></i>
         </button>
@@ -24,56 +39,104 @@
     </div>
     <div class="containter-overlay-pages design-prequal loading-bar hide">
       <div class="container-loading">
-      <p>Loading..</p>
-      <div id="container-progress">
-        <p id="progress">0%</p>
-        <div id="progress-bar"></div>
+        <p>Loading..</p>
+        <div id="container-progress">
+          <p id="progress">0%</p>
+          <div id="progress-bar"></div>
+        </div>
       </div>
-    </div>
     </div>
     <!--Header contains my navigation a switching foto left and the title right whith emphasing my name, -->
     <div class="containter-overlay-pages hide blur">
-      <header class="section-space">
+      <header id="header" class="section-space">
         <nav class="navigation">
-            <!--li><a>Experience</a></li-->
-            <li><a>Projects</a></li>
-            <li><a>Blogs</a></li>
-            <li><a><i class="bi bi-github"></i></a></li>
-            <li><a><i class="bi bi-linkedin"></i></a:></li>
+          <ul class="navi-links">
+            <li class="navi-item">
+              <a class="navi-link navi-link-btn" href="#header">Me</a>
+            </li>
+            <li class="navi-item">
+              <a class="navi-link" href="#section-1">Experience</a>
+            </li>
+            <li class="navi-item">
+              <a class="navi-link" href="#section-2">Projects</a>
+            </li>
+            <li class="navi-item">
+              <a class="navi-link extern" href="Blog">Blogs</a>
+            </li>
+            <li class="navi-item">
+              <a class="navi-link extern" href="https://github.com/"
+                ><i class="bi bi-github"></i
+              ></a>
+            </li>
+            <li class="navi-item">
+              <a
+                class="navi-link extern"
+                href="https://de.linkedin.com/in/constantin-bierschenk"
+                ><i class="bi bi-linkedin"></i>
+              </a>
+            </li>
+          </ul>
         </nav>
         <!--Icons to other stuff (github, linkedIn, HackerRank)-->
-        <div id="wrapper" >
-            <div  id="first">
-                <img src="./dummy.jpeg" class="center space-top">
+        <div id="wrapper">
+          <div id="first">
+            <img src="./dummy.jpeg" class="center space-top" />
+          </div>
+          <div id="second" class="space-top-2x">
+            <div class="center">
+              <button class="feature-button active round-70">
+                <i class="bi bi-person-bounding-box"></i>
+              </button>
+              <button class="feature-button round-70">
+                <i class="bi bi-airplane"></i>
+              </button>
+              <button class="feature-button round-70">
+                <i class="bi bi-joystick"></i>
+              </button>
             </div>
-            <div id="second" class="space-top-2x">
-              <div class="center">
-                <button class="feature-button active round-70">
-                  <i class="bi bi-person-bounding-box"></i>
-                </button>
-                <button class = "feature-button round-70">
-                  <i class="bi bi-airplane"></i>
-                </button>
-                <button class="feature-button round-70">
-                  <i class="bi bi-joystick"></i>
-                </button>
+            <div class="text-container relative">
+              <div class="short-text absolute">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
               </div>
-              <div class="text-container relative">
-                <div class="short-text absolute">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="short-text absolute"> 
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="short-text absolute">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
+              <div class="short-text absolute">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
+              </div>
+              <div class="short-text absolute">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
               </div>
             </div>
           </div>
+        </div>
       </header>
       <!--Second section "Life": Timeline or something is this direction. COMING SOON -->
-      <section class="section-space">
+      <section id="section-1" class="section-space">
         <h1>Education</h1>
         <div class="timeline">
           <div class="container-timeline left">
@@ -91,18 +154,18 @@
         </div>
       </section>
       <!--Third section "Projects": Project Selection (clickable ov image which will open more infos), Popup with project-->
-      <section class="section-space">
+      <section id="section-2" class="section-space">
         <h1>Projects</h1>
         <div class="container-projects">
           <div class="single-project">
             <h3>Project Title</h3>
             <div>
-              <img class="project" src="./dummy.jpeg">
+              <img class="project" src="./dummy.jpeg" />
             </div>
             <button>Link to project</button>
           </div>
           <div class="relative text-container-project center">
-            <div class="absolute hide" >
+            <div class="absolute hide">
               <p>Project window I text</p>
             </div>
           </div>
@@ -114,22 +177,22 @@
         </div>
       </section>
       <footer>
-          <div class="center-vertical">
-            <img class="footer" src="./dummy.jpeg">
-          </div>
-          <div class="center-vertical">
-            <img class="footer" src="./dummy.jpeg">
-          </div>
-          <div class="center-vertical">
-            <img class="footer" src="./dummy.jpeg">
-          </div>
-          <div class="center-vertical vl"></div>
-          <div class="center-vertical small-line-height" style="width: 50%;">
-            <p></p>
-            <p>Name</p>
-            <p>E-Mail</p>
-            <p>Social Media</p>
-          </div>
+        <div class="center-vertical">
+          <img class="footer" src="./dummy.jpeg" />
+        </div>
+        <div class="center-vertical">
+          <img class="footer" src="./dummy.jpeg" />
+        </div>
+        <div class="center-vertical">
+          <img class="footer" src="./dummy.jpeg" />
+        </div>
+        <div class="center-vertical vl"></div>
+        <div class="center-vertical small-line-height" style="width: 50%">
+          <p></p>
+          <p>Name</p>
+          <p>E-Mail</p>
+          <p>Social Media</p>
+        </div>
       </footer>
     </div>
   </body>
