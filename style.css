@@ -223,7 +223,7 @@ h1.title {
 }
 #first {
   width: 50%;
-  height: 85vh;
+  height: 85%;
   float: left; /* add this */
 }
 #second {
@@ -244,11 +244,11 @@ img.center {
 .short-text {
   font-size: 18px;
   text-align: justify;
-  margin: 2vh;
-  padding: 2vh;
-  border: 2px solid #111;
-  border-radius: 15% 15%;
-  box-shadow: 10px 5px 5px blue;
+  margin: 25px;
+  padding: 25px;
+  border: 5px solid #111;
+  border-radius: 50px;
+  box-shadow: 2.5px 2.5px 2.5px lightgray;
 }
 
 /* Style feature bottons (bottons to switch text) */
@@ -257,11 +257,11 @@ img.center {
   color: #444;
   border: #111;
   padding: 5px;
-  margin: 1vh;
+  margin: 2px;
   font-size: 32px;
   box-shadow: 2px 2px 2px darkslategray;
-  height: 10vh;
-  width: 10vh;
+  height: 75px;
+  width: 75px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -286,20 +286,30 @@ img.center {
 
 /* ==> Project section styling elements*/
 img.project {
-  width: 25vh;
+  width: 250px;
+  border-radius: 30%;
+}
+
+img.selected {
+  width: 400px;
   border-radius: 30%;
 }
 
 .container-projects {
-  margin: 1rem;
-  padding: 2rem;
+  margin: 1px;
+  padding: 2px;
   text-align: center;
 }
 
 .single-project {
   display: inline-block;
-  padding: 2rem;
+  padding: 2px;
   vertical-align: middle;
+}
+
+h3.selected {
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .text-container-project {

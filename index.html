@@ -83,54 +83,52 @@
             <img src="./dummy.jpeg" class="center space-top" />
           </div>
           <div id="second" class="space-top-2x">
-            <div class="center">
-              <button class="feature-button active round-70">
-                <i class="bi bi-person-bounding-box"></i>
-              </button>
-              <button class="feature-button round-70">
+            <div class="button-container center">
+              <button id="1" class="feature-button round-70">
                 <i class="bi bi-airplane"></i>
               </button>
-              <button class="feature-button round-70">
+              <button id="2" class="feature-button active round-70">
+                <i class="bi bi-person-bounding-box"></i>
+              </button>
+              <button id="3" class="feature-button round-70">
                 <i class="bi bi-joystick"></i>
               </button>
             </div>
-            <div class="text-container relative">
-              <div class="short-text absolute">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </div>
-              <div class="short-text absolute">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </div>
-              <div class="short-text absolute">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </div>
+            <div class="short-text absolute hide">
+              First: Lorem Ipsum is simply dummy text of the printing and
+              typesetting industry. Lorem Ipsum has been the industry's standard
+              dummy text ever since the 1500s, when an unknown printer took a
+              galley of type and scrambled it to make a type specimen book. It
+              has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </div>
+            <div class="short-text absolute">
+              Second: Lorem Ipsum is simply dummy text of the printing and
+              typesetting industry. Lorem Ipsum has been the industry's standard
+              dummy text ever since the 1500s, when an unknown printer took a
+              galley of type and scrambled it to make a type specimen book. It
+              has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </div>
+            <div class="short-text absolute hide">
+              Third: Lorem Ipsum is simply dummy text of the printing and
+              typesetting industry. Lorem Ipsum has been the industry's standard
+              dummy text ever since the 1500s, when an unknown printer took a
+              galley of type and scrambled it to make a type specimen book. It
+              has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
             </div>
           </div>
         </div>
@@ -141,14 +139,32 @@
         <div class="timeline">
           <div class="container-timeline left">
             <div class="content-timeline">
-              <h2>2000</h2>
-              <p>abcd</p>
+              <h2>A - B</h2>
+              <p>Schule</p>
             </div>
           </div>
           <div class="container-timeline right">
             <div class="content-timeline">
-              <h2>2000</h2>
-              <p>abcd</p>
+              <h2>B - C</h2>
+              <p>Bachelor</p>
+            </div>
+          </div>
+          <div class="container-timeline left">
+            <div class="content-timeline">
+              <h2>C - D</h2>
+              <p>Master</p>
+            </div>
+          </div>
+          <div class="container-timeline right">
+            <div class="content-timeline">
+              <h2>D - E</h2>
+              <p>Job I</p>
+            </div>
+          </div>
+          <div class="container-timeline left">
+            <div class="content-timeline">
+              <h2>E - F</h2>
+              <p>International Experiance</p>
             </div>
           </div>
         </div>
@@ -157,22 +173,34 @@
       <section id="section-2" class="section-space">
         <h1>Projects</h1>
         <div class="container-projects">
+          <button id="left"><</button>
           <div class="single-project">
-            <h3>Project Title</h3>
+            <h3>Webpage</h3>
             <div>
               <img class="project" src="./dummy.jpeg" />
             </div>
+          </div>
+          <div class="single-project">
+            <h3 class="selected">Python App</h3>
+            <div>
+              <img class="selected" src="./dummy.jpeg" />
+            </div>
+          </div>
+          <div class="single-project">
+            <h3>GitHub App</h3>
+            <div>
+              <img class="project" src="./dummy.jpeg" />
+            </div>
+          </div>
+          <button id="right">></button>
+          <div>
             <button>Link to project</button>
           </div>
-          <div class="relative text-container-project center">
-            <div class="absolute hide">
-              <p>Project window I text</p>
-            </div>
+          <div class="short-text">
+            <p>Project description: Webpage</p>
           </div>
-          <div class="relative text-container-project center">
-            <div class="absolute hide">
-              <p>Project window II text</p>
-            </div>
+          <div class="short-text hide">
+            <p>Project description: Python App</p>
           </div>
         </div>
       </section>
