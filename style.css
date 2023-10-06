@@ -17,16 +17,12 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
-}
-
-html {
-  font-size: 62.5%;
   box-sizing: border-box;
 }
 
 /* Body styling */
 body {
+  font-size: 22px;
   font-family: "Lucida", monospace;
   font-weight: 300;
   color: #444;
@@ -36,19 +32,11 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  overflow-x: hidden;
-}
-
-/* Header styling */
-h1 {
-  font-size: 48px;
-  padding-left: 2.5vh;
 }
 
 /* Special styling for title h1 headers */
-h1.title {
-  font-size: 72px;
-  line-height: 72px;
+h1 {
+  font-size: 2em;
 }
 
 /* Blur class used for js actions */
@@ -216,20 +204,36 @@ h1.title {
 }
 
 /* ==> Wrapper id and children (first, second) to design center seperated section */
-#wrapper {
-  width: 95%;
-  margin: 2.5%;
-  overflow: hidden;
+.about-container {
+  display: flex;
+  background-color: #39b385;
+  justify-content: center;
 }
-#first {
+
+.about-gallery {
   width: 50%;
-  height: 85%;
-  float: left; /* add this */
+  background-color: red;
 }
-#second {
-  width: 50%;
+
+.about-gallery img {
+  width: 75%;
+  display: block;
   margin: auto;
-  float: left; /* add this */
+  background-color: #ffbb00;
+}
+
+.about-information {
+  width: 50%;
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-info-elements {
+  display: flex;
+  justify-content: space-between;
+  background-color: #9be15d;
 }
 
 /* Class to center images */
