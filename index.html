@@ -26,8 +26,38 @@
     <title>Who Is Constantin?</title>
   </head>
   <body>
+    <header id="header" class="">
+      <nav class="navigation">
+        <ul class="navi-links">
+          <li class="navi-item">
+            <a class="navi-link navi-link-btn" href="#header">Me</a>
+          </li>
+          <li class="navi-item">
+            <a class="navi-link" href="#section-1">Experience</a>
+          </li>
+          <li class="navi-item">
+            <a class="navi-link" href="#section-2">Projects</a>
+          </li>
+          <li class="navi-item">
+            <a class="navi-link extern" href="Blog">Blogs</a>
+          </li>
+          <li class="navi-item">
+            <a class="navi-link extern" href="https://github.com/"
+              ><i class="bi bi-github"></i
+            ></a>
+          </li>
+          <li class="navi-item">
+            <a
+              class="navi-link extern"
+              href="https://de.linkedin.com/in/constantin-bierschenk"
+              ><i class="bi bi-linkedin"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <!--Overlay Page I-->
-    <div class="containter-overlay-pages design-prequal">
+    <div class="absolute design-prequal hide">
       <div class="on-off-container">
         <h1 class="space on-off-text">
           Have you tried turning it off and on again?
@@ -38,7 +68,7 @@
       </div>
     </div>
     <!--Overlay page II-->
-    <div class="containter-overlay-pages design-prequal loading-bar hide">
+    <div class="absolute design-prequal loading-bar hide">
       <div class="container-loading">
         <p>Loading..</p>
         <div id="container-progress">
@@ -48,66 +78,36 @@
       </div>
     </div>
     <!--Overlay page III (main-page)-->
-    <div class="containter-overlay-pages hide blur">
-      <header id="header" class="section-space">
-        <nav class="navigation">
-          <ul class="navi-links">
-            <li class="navi-item">
-              <a class="navi-link navi-link-btn" href="#header">Me</a>
-            </li>
-            <li class="navi-item">
-              <a class="navi-link" href="#section-1">Experience</a>
-            </li>
-            <li class="navi-item">
-              <a class="navi-link" href="#section-2">Projects</a>
-            </li>
-            <li class="navi-item">
-              <a class="navi-link extern" href="Blog">Blogs</a>
-            </li>
-            <li class="navi-item">
-              <a class="navi-link extern" href="https://github.com/"
-                ><i class="bi bi-github"></i
-              ></a>
-            </li>
-            <li class="navi-item">
-              <a
-                class="navi-link extern"
-                href="https://de.linkedin.com/in/constantin-bierschenk"
-                ><i class="bi bi-linkedin"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <!--Icons to other stuff (github, linkedIn, HackerRank)-->
-        <div class="about-container">
-          <div class="about-gallery">
-            <img src="./dummy.jpeg" />
+    <div class="absolute">
+      <!--Icons to other stuff (github, linkedIn, HackerRank)-->
+      <section class="about-container">
+        <div class="about-gallery">
+          <img src="./dummy.jpeg" />
+        </div>
+        <div class="about-information">
+          <div class="about-elements-button">
+            <button id="1" class="feature-button">
+              <i class="bi bi-airplane"></i>
+            </button>
+            <button id="2" class="feature-button">
+              <i class="bi bi-person-bounding-box"></i>
+            </button>
+            <button id="3" class="feature-button">
+              <i class="bi bi-joystick"></i>
+            </button>
           </div>
-          <div class="about-information">
-            <div class="about-info-elements">
-              <button id="1">
-                <i class="bi bi-airplane"></i>
-              </button>
-              <button id="2">
-                <i class="bi bi-person-bounding-box"></i>
-              </button>
-              <button id="3">
-                <i class="bi bi-joystick"></i>
-              </button>
-            </div>
-            <div class="about-info-elements">
-              First: Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry's standard
-              dummy text ever since the 1500s, when an unknown printer took a
-              galley of type and scrambled it to make a type specimen book. It
-              has survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </div>
-            <!--div class="short-text absolute">
+          <div class="about-elements-text">
+            First: Lorem Ipsum is simply dummy text of the printing and
+            typesetting industry. Lorem Ipsum has been the industry's standard
+            dummy text ever since the 1500s, when an unknown printer took a
+            galley of type and scrambled it to make a type specimen book. It has
+            survived not only five centuries, but also the leap into electronic
+            typesetting, remaining essentially unchanged. It was popularised in
+            the 1960s with the release of Letraset sheets containing Lorem Ipsum
+            passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.
+          </div>
+          <!--div class="short-text absolute">
               Second: Lorem Ipsum is simply dummy text of the printing and
               typesetting industry. Lorem Ipsum has been the industry's standard
               dummy text ever since the 1500s, when an unknown printer took a
@@ -131,9 +131,8 @@
               publishing software like Aldus PageMaker including versions of
               Lorem Ipsum.
             </div-->
-          </div>
         </div>
-      </header>
+      </section>
       <!--Second section "Life": Timeline or something is this direction. COMING SOON -->
       <section id="section-1" class="section-space">
         <h1>Education</h1>
@@ -205,24 +204,24 @@
           </div>
         </div>
       </section>
-      <footer>
-        <div class="center-vertical">
-          <img class="footer" src="./dummy.jpeg" />
-        </div>
-        <div class="center-vertical">
-          <img class="footer" src="./dummy.jpeg" />
-        </div>
-        <div class="center-vertical">
-          <img class="footer" src="./dummy.jpeg" />
-        </div>
-        <div class="center-vertical vl"></div>
-        <div class="center-vertical small-line-height" style="width: 50%">
-          <p></p>
-          <p>Name</p>
-          <p>E-Mail</p>
-          <p>Social Media</p>
-        </div>
-      </footer>
     </div>
+    <footer class="hide">
+      <div class="center-vertical">
+        <img class="footer" src="./dummy.jpeg" />
+      </div>
+      <div class="center-vertical">
+        <img class="footer" src="./dummy.jpeg" />
+      </div>
+      <div class="center-vertical">
+        <img class="footer" src="./dummy.jpeg" />
+      </div>
+      <div class="center-vertical vl"></div>
+      <div class="center-vertical small-line-height" style="width: 50%">
+        <p></p>
+        <p>Name</p>
+        <p>E-Mail</p>
+        <p>Social Media</p>
+      </div>
+    </footer>
   </body>
 </html>
