@@ -336,41 +336,34 @@ h3.selected {
 
 /* ==> Footer styling */
 footer {
-  background: var(--color-primary-opacity);
-  padding: 10px;
-  height: auto;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0px;
   width: 100%;
-  display: inline-block;
-  white-space: nowrap;
-}
-.center-vertical {
-  display: inline-block;
-  white-space: normal;
-  overflow: hidden;
-  vertical-align: middle;
+  background: var(--color-primary-opacity);
 }
 
-.small-line-height {
-  line-height: 5px;
+.footer-link-elements {
+  display: flex;
+  justify-content: left;
+  width: 50%;
 }
 
-p {
-  font-size: 16px;
-}
-
-h2.footer {
-  text-align: center;
-  font-size: 24px;
-}
-
-.vl {
-  border-left: 6px solid green;
-  height: 50px;
+.footer-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: left;
+  width: 50%;
+  padding-left: 10px;
+  border-left: solid 2px lightskyblue;
+  font-size: 0.7em;
 }
 
 img.footer {
   padding: 5px;
-  width: 10vh;
+  width: 10%;
   border-radius: 30%;
 }
 
