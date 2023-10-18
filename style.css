@@ -165,31 +165,11 @@ h1 {
   justify-content: space-around;
 }
 
-.about-elements-text {
-  display: flex;
+.text-element {
   border: solid 5px black;
   border-radius: 25px;
   padding: 25px;
   margin: 20px;
-}
-
-/* Class to center images */
-img.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%;
-}
-
-/* Style for short text */
-.short-text {
-  font-size: 18px;
-  text-align: justify;
-  margin: 25px;
-  padding: 25px;
-  border: 5px solid #111;
-  border-radius: 50px;
-  box-shadow: 2.5px 2.5px 2.5px lightgray;
 }
 
 /* Style feature bottons (bottons to switch text) */
@@ -211,37 +191,60 @@ img.center {
 }
 
 /* ==> Project section styling elements*/
-img.project {
-  width: 250px;
-  border-radius: 30%;
-}
-
-img.selected {
-  width: 400px;
-  border-radius: 30%;
-}
-
 .container-projects {
-  margin: 1px;
-  padding: 2px;
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
 }
 
-.single-project {
-  display: inline-block;
-  padding: 2px;
-  vertical-align: middle;
+.container-projects button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 10%;
+  font-size: 1.5em;
 }
 
-h3.selected {
-  font-size: 22px;
-  font-weight: bold;
+.project-element {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
 }
 
-.text-container-project {
+.project-element img {
+  border-radius: 30%;
+  padding: 25px;
+}
+
+.project-element.focus img {
   width: 100%;
-  height: auto;
-  margin: auto;
+  border-radius: 30%;
+}
+.project-element.focus h3 {
+  font-size: 1.5em;
+}
+
+.container-project-information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-project-information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-project-information div {
+  border: solid 5px black;
+  border-radius: 25px;
 }
 
 /* ==> Education section styling elements (timeline)*/
