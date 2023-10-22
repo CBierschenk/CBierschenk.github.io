@@ -1,23 +1,23 @@
 "use strict";
 
 // === Globals ===
+// TODO: Improve page tracking
 const ON_OFF = 0;
 const LOADING = 1;
 const MAIN = 2;
+const PREQUAL_SKIP = false;
 const LOADING_BAR_TICKS = 100;
-const PREQUAL_SKIP = true;
+const LOADING_INTERVAL = 50;
+const TICKS_TILL_UNBLUR = 10;
+const UNBLUR_TIMEINTERVAL = 100;
 const MAX_PROJECTS = 3;
 
 // === DOM-Element Selection ===
 const powerButton = document.querySelector(".power-button");
-const overlayedPages = document.getElementsByClassName(
-  "containter-overlay-pages"
-);
-const onOffContainer = document.querySelector(".on-off-container");
-const loadingContainer = document.querySelector(".container-loading");
+const pages = document.querySelectorAll("div[id*='page']");
+const loadingContainer = pages[1].querySelector(".prequal-container");
 const progressCount = document.querySelector("#progress");
 const progressBar = document.querySelector("#progress-bar");
-
 // === Callbacks ===
 const progressLoadingBar = function (loadingTicks) {
   let loadingPercentige = LOADING_BAR_TICKS - loadingTicks;
@@ -25,55 +25,107 @@ const progressLoadingBar = function (loadingTicks) {
   progressCount.innerText = `${loadingPercentige}%`;
 };
 
-// === Event-Listener ===
-/* 
-The click on the button starts the nested prequel sequence. The different stages are:
-1. Event button clicked -> adds drop css class, queries added drop class and ands a event listener to react on end
-2. Event drop animation ends -> adds the lr-slide css class to the loading container, toggels hide styles, queries slide animation and uses this to trigger the next event
-3. Event lr-slide ends -> set interval to animate loading bar (could replaced by css webkit animation)
-4. End of loading interval -> set interval to unblur main page.
-//TODO: Refactor via Promise & add skip option button
-*/
+// === Page State ===
+const pageState = {
+  currPageNumber: PREQUAL_SKIP ? pages.length : 1,
+  currPage: PREQUAL_SKIP ? pages[MAIN] : pages[ON_OFF],
+};
+
+// == Prequal Code ==
 if (!PREQUAL_SKIP) {
-  powerButton.addEventListener("click", () => {
-    onOffContainer.classList.add("drop");
-    const dropAnimation = document.querySelector(".drop");
-    dropAnimation.addEventListener("animationend", () => {
-      loadingContainer.classList.add("lr-slide");
-      overlayedPages[ON_OFF].classList.add("hide");
-      overlayedPages[LOADING].classList.remove("hide");
-      const slideAnimation = document.querySelector(".lr-slide");
-      slideAnimation.addEventListener("animationend", () => {
-        let loadingTicks = LOADING_BAR_TICKS;
-        const loadingInterval = setInterval(() => {
-          progressLoadingBar(loadingTicks);
-          if (!loadingTicks) {
-            clearInterval(loadingInterval);
-            overlayedPages[LOADING].classList.add("hide");
-            overlayedPages[MAIN].classList.remove("hide");
-            let unblurTicks = 10;
-            const unblurInterval = setInterval(() => {
-              overlayedPages[MAIN].style.webkitFilter = `blur(${
-                unblurTicks - 1
-              }px)`;
-              unblurTicks--;
-              if (!unblurTicks) {
-                clearInterval(unblurInterval);
-              }
-            }, 100);
-          }
-          loadingTicks--;
-        }, 50);
-      });
-    });
-  });
+  runPrequal();
 } else {
-  overlayedPages[ON_OFF].classList.add("hide");
-  overlayedPages[MAIN].classList.remove("hide");
-  overlayedPages[MAIN].style.webkitFilter = `blur(0px)`;
+  pages[ON_OFF].classList.add("hide");
+  pages[MAIN].classList.remove("hide");
+  pages[MAIN].style.webkitFilter = `blur(0px)`;
 }
 
-// Navigation Bar (Lazy scrolling)
+// Main prequal function
+async function runPrequal() {
+  await promisePowerButtonPressed();
+  await waitUntilAnimationFinished(".drop");
+  loadingContainer.classList.add("lr-slide");
+  nextPage(pageState);
+  await waitUntilAnimationFinished(".lr-slide");
+  await runLoadingBarAnimation();
+  nextPage(pageState);
+  await unblurMainPage(pageState);
+  console.log("Prequal complete! Welcome to main page");
+}
+
+async function promisePowerButtonPressed() {
+  return new Promise((resolve) =>
+    powerButton.addEventListener("click", () => {
+      pages[pageState.currPageNumber - 1]
+        .querySelector(".prequal-container")
+        .classList.add("drop");
+      resolve();
+    })
+  );
+}
+
+async function promisePowerButtonPressed() {
+  return new Promise((resolve) =>
+    powerButton.addEventListener("click", () => {
+      pages[pageState.currPageNumber - 1]
+        .querySelector(".prequal-container")
+        .classList.add("drop");
+      resolve();
+    })
+  );
+}
+
+async function waitUntilAnimationFinished(animationSelector) {
+  return new Promise((resolve, reject) => {
+    const animation = document.querySelector(
+      typeof animationSelector === String
+        ? animationSelector
+        : `${animationSelector}`
+    );
+    if (!animation) {
+      reject(`Could not query the animation: ${animationSelector}`);
+    }
+    animation.addEventListener("animationend", () => resolve());
+  });
+}
+
+// TODO: Improve page handling
+function nextPage(state) {
+  pages[state.currPageNumber - 1].classList.add("hide");
+  pages[state.currPageNumber].classList.remove("hide");
+  state.currPage = pages[state.currPageNumber];
+  state.currPageNumber++;
+}
+
+async function runLoadingBarAnimation() {
+  return new Promise((resolve) => {
+    let loadingTicks = LOADING_BAR_TICKS;
+    const loadingInterval = setInterval(() => {
+      progressLoadingBar(loadingTicks);
+      if (!loadingTicks) {
+        clearInterval(loadingInterval);
+        resolve();
+      }
+      loadingTicks--;
+    }, LOADING_INTERVAL);
+  });
+}
+
+async function unblurMainPage(state) {
+  return new Promise((resolve) => {
+    let unblurTicks = TICKS_TILL_UNBLUR;
+    const unblurInterval = setInterval(() => {
+      state.currPage.style.webkitFilter = `blur(${unblurTicks - 1}px)`;
+      unblurTicks--;
+      if (!unblurTicks) {
+        clearInterval(unblurInterval);
+        resolve();
+      }
+    }, UNBLUR_TIMEINTERVAL);
+  });
+}
+
+// == Navigation Bar ==
 document.querySelector(".navi-links").addEventListener("click", function (e) {
   e.preventDefault();
   let eventTarget = e.target;
@@ -112,8 +164,6 @@ document
       eventTarget.classList.add("active");
     }
   });
-
-// Timeline (education text switching)
 
 // Project slidingshow
 let slideshowIndex = 1;
