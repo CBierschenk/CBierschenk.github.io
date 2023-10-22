@@ -39,6 +39,10 @@ h1 {
   font-size: 2em;
 }
 
+section {
+  margin-bottom: 20px;
+}
+
 /* Blur class used for js actions */
 .blur {
   filter: blur(5px);
@@ -84,11 +88,6 @@ h1 {
   color: red;
   font-size: 172px;
   border-radius: 15%;
-}
-
-/* Class to add constance space after sections */
-.section-space {
-  padding-bottom: 10vh;
 }
 
 /* ==> Progress bar styling */
@@ -188,7 +187,7 @@ h1 {
 }
 
 /* Styling active feature button */
-.feature-button.active {
+.feature-button:hover {
   background-color: #fd424b;
   box-shadow: 0 0px 2px darkslategray;
   transition: translateY(2px);
@@ -209,6 +208,10 @@ h1 {
   outline: none;
   width: 10%;
   font-size: 1.5em;
+}
+
+.container-projects button:hover {
+  color: red;
 }
 
 .project-element {
