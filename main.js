@@ -30,6 +30,7 @@ const pageState = {
   currPageNumber: PREQUAL_SKIP ? pages.length : 1,
   currPage: PREQUAL_SKIP ? pages[MAIN] : pages[ON_OFF],
   activeAboutText: 1,
+  activeProject: 1,
 };
 
 // == Prequal Code ==
@@ -139,30 +140,34 @@ function toggleNavigation() {
 }
 
 // == Navigation Bar ==
-document.querySelector(".navi-links").addEventListener("click", function (e) {
-  e.preventDefault();
-  let eventTarget = e.target;
+document
+  .querySelector(".navi-links")
+  .addEventListener("click", navigationAction);
+
+function navigationAction(event) {
+  event.preventDefault();
+  let eventTarget = event.target;
   if (eventTarget.classList.contains("bi")) {
-    eventTarget = e.target.parentElement;
+    eventTarget = event.target.parentElement;
   }
   if (eventTarget.classList.contains("navi-link")) {
+    console.log(eventTarget.classList.contains("extern"));
     if (eventTarget.classList.contains("extern")) {
-      window.open(eventTarget.geabout - containertAttribute("href"));
+      window.open(eventTarget.getAttribute("href"));
     } else {
       const id = eventTarget.getAttribute("href");
       document.querySelector(id).scrollIntoView({ behavior: "smooth" });
     }
   }
-});
-
+}
 // About text switching
-console.log(aboutText);
-aboutButtonsContainer.addEventListener("click", function (e) {
-  console.log("Click");
-  e.preventDefault();
-  let eventTarget = e.target;
+aboutButtonsContainer.addEventListener("click", aboutButtonsAction);
+
+function aboutButtonsAction(event) {
+  event.preventDefault();
+  let eventTarget = event.target;
   if (eventTarget.classList.contains("bi")) {
-    eventTarget = e.target.parentElement;
+    eventTarget = event.target.parentElement;
   }
   console.log(eventTarget);
   if (eventTarget && eventTarget.id) {
@@ -172,8 +177,7 @@ aboutButtonsContainer.addEventListener("click", function (e) {
     eventTarget.classList.add("active-button");
     aboutText.innerHTML = switchAboutText("About", eventTarget.id);
   }
-});
-
+}
 function switchAboutText(textSection, textId) {
   //TODO: Create textFile and get function
   //const newText = getText(textSection, textId);
