@@ -5,7 +5,7 @@
 const ON_OFF = 0;
 const LOADING = 1;
 const MAIN = 2;
-const PREQUAL_SKIP = false;
+const PREQUAL_SKIP = true;
 const LOADING_BAR_TICKS = 100;
 const LOADING_INTERVAL = 50;
 const TICKS_TILL_UNBLUR = 10;
@@ -23,6 +23,14 @@ const aboutButtons = document.getElementsByClassName("feature-button");
 const aboutButtonsContainer = document.querySelector(".about-buttons");
 const aboutText = document
   .querySelector(".about-information")
+  .querySelector(".text-element");
+const projectsContainer = document.querySelector(".container-projects");
+const projectsSlideshow = document.querySelector(
+  ".container-projects-slideshow"
+);
+const projects = document.getElementsByClassName("project-element");
+const projectText = document
+  .querySelector(".container-project-information")
   .querySelector(".text-element");
 
 // === Page State ===
@@ -175,13 +183,13 @@ function aboutButtonsAction(event) {
       btn.classList.remove("active-button");
     });
     eventTarget.classList.add("active-button");
-    aboutText.innerHTML = switchAboutText("About", eventTarget.id);
+    aboutText.innerHTML = switchText("About", eventTarget.id);
   }
 }
-function switchAboutText(textSection, textId) {
+function switchText(textSection, textId) {
   //TODO: Create textFile and get function
   //const newText = getText(textSection, textId);
-  const htmlMarkup = `${textId}`;
+  const htmlMarkup = `${textSection}`;
   return htmlMarkup;
 }
 
@@ -192,24 +200,21 @@ function initializeAboutText() {
 }
 
 // Project slidingshow
-let slideshowIndex = 1;
-const projectsArray = document.getElementsByClassName("single-project");
-document.querySelector(".container-projects").addEventListener("click", (e) => {
-  let eventTarget = e.target;
-  console.log(projectsArray);
+projectsContainer.addEventListener("click", updateSelectedProject);
+
+function updateSelectedProject(event) {
+  let eventTarget = event.target;
   if (eventTarget.nodeName.toLowerCase() === "button") {
-    if (e.target.id === "left") {
-      const currentPrj = projectsArray[slideshowIndex];
-      const selectedProjectImg = currentPrj.getElementsByTagName("img")[0];
-      selectedProjectImg.classList.remove("project");
-      selectedProjectImg.classList.add("selected");
-      const selectedProjectHeader = currentPrj.getElementsByTagName("h3")[0];
-      selectedProjectHeader.classList.remove("project");
-      selectedProjectHeader.classList.add("selected");
-    }
-    if (e.target.id === "right") {
-      console.log("right");
-    }
+    slideProjects(eventTarget);
+    projectText.innerHTML = switchText(projects[1].innerText, 0);
   }
-  console.log(eventTarget.nodeName);
-});
+}
+
+function slideProjects(eventTarget) {
+  projects[1].classList.remove("focus");
+  projectsSlideshow.appendChild(projects[0]); // moves the first element to the last slideshow position
+  if (eventTarget.id === "right") {
+    projectsSlideshow.appendChild(projects[0]); // second move if right button pressed results in right rotation
+  }
+  projects[1].classList.add("focus");
+}

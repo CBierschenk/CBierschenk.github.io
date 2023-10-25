@@ -202,7 +202,13 @@ section {
 /* ==> Project section styling elements*/
 .container-projects {
   display: flex;
+  justify-content: space-between;
+}
+
+.container-projects-slideshow {
+  display: flex;
   justify-content: space-around;
+  width: 100%;
 }
 
 .container-projects button {
