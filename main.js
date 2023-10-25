@@ -18,17 +18,18 @@ const pages = document.querySelectorAll("div[id*='page']");
 const loadingContainer = pages[1].querySelector(".prequal-container");
 const progressCount = document.querySelector("#progress");
 const progressBar = document.querySelector("#progress-bar");
-// === Callbacks ===
-const progressLoadingBar = function (loadingTicks) {
-  let loadingPercentige = LOADING_BAR_TICKS - loadingTicks;
-  progressBar.style.width = `${loadingPercentige}%`;
-  progressCount.innerText = `${loadingPercentige}%`;
-};
+const navigation = document.querySelector("#header");
+const aboutButtons = document.getElementsByClassName("feature-button");
+const aboutButtonsContainer = document.querySelector(".about-buttons");
+const aboutText = document
+  .querySelector(".about-information")
+  .querySelector(".text-element");
 
 // === Page State ===
 const pageState = {
   currPageNumber: PREQUAL_SKIP ? pages.length : 1,
   currPage: PREQUAL_SKIP ? pages[MAIN] : pages[ON_OFF],
+  activeAboutText: 1,
 };
 
 // == Prequal Code ==
@@ -38,6 +39,7 @@ if (!PREQUAL_SKIP) {
   pages[ON_OFF].classList.add("hide");
   pages[MAIN].classList.remove("hide");
   pages[MAIN].style.webkitFilter = `blur(0px)`;
+  toggleNavigation();
 }
 
 // Main prequal function
@@ -50,6 +52,7 @@ async function runPrequal() {
   await runLoadingBarAnimation();
   nextPage(pageState);
   await unblurMainPage(pageState);
+  toggleNavigation();
   console.log("Prequal complete! Welcome to main page");
 }
 
@@ -111,6 +114,12 @@ async function runLoadingBarAnimation() {
   });
 }
 
+function progressLoadingBar(loadingTicks) {
+  let loadingPercentige = LOADING_BAR_TICKS - loadingTicks;
+  progressBar.style.width = `${loadingPercentige}%`;
+  progressCount.innerText = `${loadingPercentige}%`;
+}
+
 async function unblurMainPage(state) {
   return new Promise((resolve) => {
     let unblurTicks = TICKS_TILL_UNBLUR;
@@ -125,6 +134,10 @@ async function unblurMainPage(state) {
   });
 }
 
+function toggleNavigation() {
+  navigation.classList.toggle("hide");
+}
+
 // == Navigation Bar ==
 document.querySelector(".navi-links").addEventListener("click", function (e) {
   e.preventDefault();
@@ -134,7 +147,7 @@ document.querySelector(".navi-links").addEventListener("click", function (e) {
   }
   if (eventTarget.classList.contains("navi-link")) {
     if (eventTarget.classList.contains("extern")) {
-      window.open(eventTarget.getAttribute("href"));
+      window.open(eventTarget.geabout - containertAttribute("href"));
     } else {
       const id = eventTarget.getAttribute("href");
       document.querySelector(id).scrollIntoView({ behavior: "smooth" });
@@ -143,27 +156,36 @@ document.querySelector(".navi-links").addEventListener("click", function (e) {
 });
 
 // About text switching
-const shortTextArray = document.getElementsByClassName("short-text");
-const buttonArray = document.getElementsByClassName("feature-button");
-document
-  .querySelector(".button-container")
-  .addEventListener("click", function (e) {
-    e.preventDefault();
-    let eventTarget = e.target;
-    if (eventTarget.classList.contains("bi")) {
-      eventTarget = e.target.parentElement;
-    }
-    if (eventTarget && eventTarget.id) {
-      Array.prototype.forEach.call(buttonArray, (btn) => {
-        btn.classList.remove("active");
-      });
-      Array.prototype.forEach.call(shortTextArray, (shortText) => {
-        shortText.classList.add("hide");
-      });
-      shortTextArray[parseInt(eventTarget.id) - 1].classList.remove("hide");
-      eventTarget.classList.add("active");
-    }
-  });
+console.log(aboutText);
+aboutButtonsContainer.addEventListener("click", function (e) {
+  console.log("Click");
+  e.preventDefault();
+  let eventTarget = e.target;
+  if (eventTarget.classList.contains("bi")) {
+    eventTarget = e.target.parentElement;
+  }
+  console.log(eventTarget);
+  if (eventTarget && eventTarget.id) {
+    Array.prototype.forEach.call(aboutButtons, (btn) => {
+      btn.classList.remove("active-button");
+    });
+    eventTarget.classList.add("active-button");
+    aboutText.innerHTML = switchAboutText("About", eventTarget.id);
+  }
+});
+
+function switchAboutText(textSection, textId) {
+  //TODO: Create textFile and get function
+  //const newText = getText(textSection, textId);
+  const htmlMarkup = `${textId}`;
+  return htmlMarkup;
+}
+
+//TODO: Uses this later
+function initializeAboutText() {
+  aboutButtons[pageState.activeAboutText].classList.add("active-button");
+  aboutText.innerHTML = switchAboutText("About", pageState.activeAboutText);
+}
 
 // Project slidingshow
 let slideshowIndex = 1;

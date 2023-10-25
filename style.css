@@ -158,10 +158,11 @@ section {
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 75px;
 }
 
-.about-elements-button {
+.about-buttons {
   display: flex;
   margin-bottom: 10%;
   justify-content: space-around;
@@ -184,13 +185,18 @@ section {
   width: 10vh;
   border-radius: 100%;
   cursor: pointer;
+  box-shadow: 0 4px 4px #2f4f4f;
 }
 
 /* Styling active feature button */
 .feature-button:hover {
   background-color: #fd424b;
-  box-shadow: 0 0px 2px darkslategray;
-  transition: translateY(2px);
+  box-shadow: 0 2px 1px #2f4f4f;
+}
+
+.active-button {
+  background-color: #fd424b;
+  box-shadow: 0 2px 2px #2f4f4f;
 }
 
 /* ==> Project section styling elements*/
