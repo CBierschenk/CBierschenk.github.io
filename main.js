@@ -34,16 +34,88 @@ const projectText = document
   .querySelector(".text-element");
 
 // === Page State ===
-const pageState = {
-  currPageNumber: PREQUAL_SKIP ? pages.length : 1,
-  currPage: PREQUAL_SKIP ? pages[MAIN] : pages[ON_OFF],
-  activeAboutText: 1,
-  activeProject: 1,
+
+let pageState = {
+  _skipPrequal: false,
+  _currPageNumber: this._skipPrequal ? pages.length : 1,
+  _currPage: this._skipPrequal ? pages[MAIN] : pages[ON_OFF],
+  _activeAboutText: 1,
+  _activeProject: 1,
+
+  get skipPrequal() {
+    return this._skipPrequal;
+  },
+  get currPageNumber() {
+    return this._currPageNumber;
+  },
+  get currPage() {
+    return this._currPage;
+  },
+  get activeAboutText() {
+    return this._activeAboutText;
+  },
+  get activeProject() {
+    return this._activeProject;
+  },
+  set skipPrequal(value) {
+    this._skipPrequal = value;
+    this.storeInLocalStorage();
+  },
+  set currPageNumber(value) {
+    this._currPageNumber = value;
+    this.storeInLocalStorage();
+  },
+  set currPage(value) {
+    this._currPage = value;
+    this.storeInLocalStorage();
+  },
+  set activeAboutText(value) {
+    this._activeAboutText = value;
+    this.storeInLocalStorage();
+  },
+  set activeProject(value) {
+    this._activeProject = value;
+    this.storeInLocalStorage();
+  },
+  storeInLocalStorage() {
+    const stringifiedProperties = this.toJSON();
+    window.localStorage.setItem(
+      "pageState",
+      JSON.stringify(stringifiedProperties)
+    );
+  },
+  toJSON() {
+    return {
+      skipPrequal: this.skipPrequal,
+      currPageNumber: this.skipPrequal,
+      currPage: this.skipPrequal,
+      activeAboutText: this.skipPrequal,
+      activeProject: this.skipPrequal,
+    };
+  },
 };
 
+function loadPageState(state) {
+  console.log(`Loading page state!`);
+  try {
+    const newState = JSON.parse(window.localStorage.getItem("pageState"));
+    state.skipPrequal = newState.skipPrequal;
+    state.currPageNumber = newState.currPageNumber;
+    state.currPage = newState.currPage;
+    state.activeAboutText = newState.activeAboutText;
+    state.activeProject = newState.activeProject;
+    return state;
+  } catch {
+    console.log(`Couldn't load page state`);
+    return state;
+  }
+}
+pageState = loadPageState(pageState);
+
 // == Prequal Code ==
-if (!PREQUAL_SKIP) {
+if (!pageState.skipPrequal) {
   runPrequal();
+  pageState.skipPrequal = true;
 } else {
   pages[ON_OFF].classList.add("hide");
   pages[MAIN].classList.remove("hide");
@@ -51,7 +123,7 @@ if (!PREQUAL_SKIP) {
   toggleNavigation();
 }
 
-// Main prequal function
+// Main Prequal Function
 async function runPrequal() {
   await promisePowerButtonPressed();
   await waitUntilAnimationFinished(".drop");
@@ -63,17 +135,6 @@ async function runPrequal() {
   await unblurMainPage(pageState);
   toggleNavigation();
   console.log("Prequal complete! Welcome to main page");
-}
-
-async function promisePowerButtonPressed() {
-  return new Promise((resolve) =>
-    powerButton.addEventListener("click", () => {
-      pages[pageState.currPageNumber - 1]
-        .querySelector(".prequal-container")
-        .classList.add("drop");
-      resolve();
-    })
-  );
 }
 
 async function promisePowerButtonPressed() {
@@ -106,7 +167,7 @@ function nextPage(state) {
   pages[state.currPageNumber - 1].classList.add("hide");
   pages[state.currPageNumber].classList.remove("hide");
   state.currPage = pages[state.currPageNumber];
-  state.currPageNumber++;
+  state.currPageNumber = state.currPageNumber + 1;
 }
 
 async function runLoadingBarAnimation() {
@@ -168,7 +229,8 @@ function navigationAction(event) {
     }
   }
 }
-// About text switching
+
+// == About Text Switching ==
 aboutButtonsContainer.addEventListener("click", aboutButtonsAction);
 
 function aboutButtonsAction(event) {
