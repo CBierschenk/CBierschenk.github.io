@@ -280,3 +280,15 @@ function slideProjects(eventTarget) {
   }
   projects[1].classList.add("focus");
 }
+
+// Utils
+function getText(textFile, ...textLocation) {
+  let failText = `E - Text for ${textLocation} not found!`;
+  if (textLocation.length === 0) return failText;
+  // Loop over object and extract text by object tree
+  let searchText = textFile;
+  for (const property of textLocation) {
+    searchText = searchText[property];
+  }
+  return searchText || typeof searchText === String ? searchText : failText;
+}

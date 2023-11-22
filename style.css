@@ -53,11 +53,6 @@ section {
   display: none;
 }
 
-/* Absolute class to set absolute positioning */
-.absolute {
-  position: absolute;
-}
-
 /* Relative class to set relative positioning */
 .relative {
   position: relative;
