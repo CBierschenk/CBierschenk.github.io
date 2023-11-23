@@ -215,25 +215,15 @@ document
 
 function navigationAction(event) {
   event.preventDefault();
-  console.log(event.target);
   let eventTarget = event.target;
-  if (eventTarget.classList.contains("navi-item")) {
-    eventTarget = eventTarget.children[0];
-  }
-  if (eventTarget.classList.contains("bi")) {
-    eventTarget = event.target.parentElement;
-  }
-  if (eventTarget.classList.contains("navi-link")) {
-    if (eventTarget.classList.contains("extern")) {
-      window.open(eventTarget.getAttribute("id"));
-    } else {
-      const id = eventTarget.getAttribute("id");
-      console.log(id);
-      document.querySelector(id).scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+  if (eventTarget.classList.contains("extern")) {
+    window.open(eventTarget.getAttribute("id"));
+  } else {
+    const id = eventTarget.getAttribute("id");
+    document.querySelector(id).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   }
 }
 
