@@ -18,7 +18,8 @@ const pages = document.querySelectorAll("div[id*='page']");
 const loadingContainer = pages[1].querySelector(".prequal-container");
 const progressCount = document.querySelector("#progress");
 const progressBar = document.querySelector("#progress-bar");
-const navigation = document.querySelector("#header");
+const header = document.querySelector("#header");
+const navigation = document.querySelector(".navigation");
 const aboutButtons = document.getElementsByClassName("feature-button");
 const aboutButtonsContainer = document.querySelector(".about-buttons");
 const aboutText = document
@@ -205,13 +206,31 @@ async function unblurMainPage(state) {
 }
 
 function toggleNavigation() {
-  navigation.classList.toggle("hide");
+  navigation.style.opacity = "0";
+  header.classList.toggle("hide");
+}
+
+function showNavigation(event) {
+  console.log("Swithc");
+  console.log(event);
+  if (event.type === "mouseleave") {
+    navigation.style.opacity = "0";
+  } else {
+    navigation.style.opacity = "1";
+  }
 }
 
 // == Navigation Bar ==
 document
   .querySelector(".navi-links")
   .addEventListener("click", navigationAction);
+
+document
+  .querySelector(".navigation")
+  .addEventListener("mouseenter", showNavigation);
+document
+  .querySelector(".navigation")
+  .addEventListener("mouseleave", showNavigation);
 
 function navigationAction(event) {
   event.preventDefault();
