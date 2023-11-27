@@ -30,18 +30,20 @@ const projectsSlideshow = document.querySelector(
   ".container-projects-slideshow"
 );
 const projects = document.getElementsByClassName("project-element");
-const projectText = document
-  .querySelector(".container-project-information")
-  .querySelector(".text-element");
+const projectText = document.querySelector(".container-project-information");
 
 // === Page State ===
 
+// change default values?
 let pageState = {
   _skipPrequal: false,
   _currPageNumber: this._skipPrequal ? pages.length : 1,
   _currPage: this._skipPrequal ? pages[MAIN] : pages[ON_OFF],
   _activeAboutText: 1,
-  _activeProject: 1,
+  _numberProjects: -1,
+  _mappingProjects: [],
+  _activeProject: "",
+  _projectFocusIndex: 0,
 
   get skipPrequal() {
     return this._skipPrequal;
@@ -55,8 +57,17 @@ let pageState = {
   get activeAboutText() {
     return this._activeAboutText;
   },
+  get numberProjects() {
+    return this._numberProjects;
+  },
+  get mappingProjects() {
+    return this._mappingProjects;
+  },
   get activeProject() {
     return this._activeProject;
+  },
+  get projectFocusIndex() {
+    return this._projectFocusIndex;
   },
   set skipPrequal(value) {
     this._skipPrequal = value;
@@ -74,24 +85,37 @@ let pageState = {
     this._activeAboutText = value;
     this.storeInLocalStorage();
   },
+  set numberProjects(value) {
+    this._numberProjects = value;
+    this.storeInLocalStorage();
+  },
+  set mappingProjects(value) {
+    this._mappingProjects = value;
+    this.storeInLocalStorage();
+  },
   set activeProject(value) {
     this._activeProject = value;
     this.storeInLocalStorage();
   },
+  set projectFocusIndex(value) {
+    this._projectFocusIndex = value;
+    this.storeInLocalStorage();
+  },
+  addMappingProjects(value) {
+    this._mappingProjects.push(value);
+    this.storeInLocalStorage();
+  },
   storeInLocalStorage() {
-    const stringifiedProperties = this.toJSON();
-    window.localStorage.setItem(
-      "pageState",
-      JSON.stringify(stringifiedProperties)
-    );
+    window.localStorage.setItem("pageState", JSON.stringify(this));
   },
   toJSON() {
     return {
       skipPrequal: this.skipPrequal,
-      currPageNumber: this.skipPrequal,
-      currPage: this.skipPrequal,
-      activeAboutText: this.skipPrequal,
-      activeProject: this.skipPrequal,
+      currPageNumber: this.currPageNumber,
+      currPage: this.currPage,
+      activeAboutText: this.activeAboutText,
+      activeProject: this.activeProject,
+      projectFocusIndex: this.projectFocusIdx,
     };
   },
 };
@@ -105,6 +129,7 @@ function loadPageState(state) {
     state.currPage = newState.currPage;
     state.activeAboutText = newState.activeAboutText;
     state.activeProject = newState.activeProject;
+    state.projectFocusIndex = newState.projectFocusIdx;
     return state;
   } catch {
     console.log(`Couldn't load page state`);
@@ -123,6 +148,7 @@ if (!pageState.skipPrequal) {
   pages[MAIN].style.webkitFilter = `blur(0px)`;
   toggleNavigation();
 }
+initializeProjectSection();
 
 // Main Prequal Function
 async function runPrequal() {
@@ -211,8 +237,6 @@ function toggleNavigation() {
 }
 
 function showNavigation(event) {
-  console.log("Swithc");
-  console.log(event);
   if (event.type === "mouseleave") {
     navigation.style.opacity = "0";
   } else {
@@ -261,20 +285,78 @@ function aboutButtonsAction(event) {
       btn.classList.remove("active-button");
     });
     eventTarget.classList.add("active-button");
-    aboutText.innerHTML = switchText("About", eventTarget.id);
+    aboutText.innerHTML = getText(text, "about", eventTarget.id);
   }
-}
-function switchText(textSection, textId) {
-  //TODO: Create textFile and get function
-  //const newText = getText(textSection, textId);
-  const htmlMarkup = `${textSection}`;
-  return htmlMarkup;
 }
 
 //TODO: Uses this later
 function initializeAboutText() {
   aboutButtons[pageState.activeAboutText].classList.add("active-button");
   aboutText.innerHTML = switchAboutText("About", pageState.activeAboutText);
+}
+
+// === Projects Sections ===
+
+// Initialization project section
+function initializeProjectSection() {
+  const definedProjects = getElementsFromText(text, "projects");
+  pageState.numberProjects = definedProjects.length;
+  pageState.projectFocusIndex = Math.round(pageState.numberProjects / 2) - 1;
+  // Disable button if only one project
+  if (pageState.numberProjects <= 1) {
+    const containerChildren = projectsContainer.children;
+    for (let idx = 0; idx < containerChildren.length; ++idx) {
+      if (containerChildren[idx].nodeName.toLowerCase() === "button") {
+        containerChildren[idx].classList.add("hide");
+      }
+    }
+  }
+  if (!pageState.activeProject && pageState.numberProjects > 1) {
+    pageState.activeProject = definedProjects[1];
+  } else if (!pageState.activeProject) {
+    pageState.activeProject = definedProjects[-1];
+  }
+  for (const project of definedProjects) {
+    pageState.addMappingProjects(project);
+    const projectTitle = getText(text, "projects", project, "title");
+    const projectImg = getText(text, "projects", project, "img");
+    const projectInSlideshow = `
+                              <div class="project-element">
+                                <h3>${projectTitle}</h3>
+                                <img src="${projectImg}"/>
+                              </div>
+                             `;
+    projectsSlideshow.insertAdjacentHTML("beforeend", projectInSlideshow);
+  }
+  const projectDescription = getText(
+    text,
+    "projects",
+    pageState.activeProject,
+    "description"
+  );
+  // Code to initialize the correct project section state
+  const idxProjectFocussed = pageState.mappingProjects.indexOf(
+    pageState.activeProject
+  );
+  let projectFocusDifference = pageState.projectFocusIndex - idxProjectFocussed;
+  if (projectFocusDifference > 0) {
+    projectsSlideshow.appendChild(projects[0]);
+    while (projectFocusDifference--) {
+      projectsSlideshow.appendChild(projects[0]);
+    }
+  } else if (projectFocusDifference) {
+    while (projectFocusDifference++) {
+      projectsSlideshow.appendChild(projects[0]);
+    }
+  }
+  projects[pageState.projectFocusIndex].classList.add("focus");
+  const projectInformation = `
+      <button>"Link to project"</button>
+      <div class="text-element">
+        <p>${projectDescription}</p>
+      </div>
+    `;
+  projectText.insertAdjacentHTML("beforeend", projectInformation);
 }
 
 // Project slidingshow
@@ -284,27 +366,77 @@ function updateSelectedProject(event) {
   let eventTarget = event.target;
   if (eventTarget.nodeName.toLowerCase() === "button") {
     slideProjects(eventTarget);
-    projectText.innerHTML = switchText(projects[1].innerText, 0);
+    projectText.children[0].innerHTML = getText(
+      text,
+      "projects",
+      pageState.activeProject,
+      "link"
+    );
+    projectText.children[1].innerHTML = getText(
+      text,
+      "projects",
+      pageState.activeProject,
+      "description"
+    );
   }
 }
 
 function slideProjects(eventTarget) {
-  projects[1].classList.remove("focus");
+  projects[pageState.projectFocusIndex].classList.remove("focus");
   projectsSlideshow.appendChild(projects[0]); // moves the first element to the last slideshow position
-  if (eventTarget.id === "right") {
-    projectsSlideshow.appendChild(projects[0]); // second move if right button pressed results in right rotation
+  let projectShiftValue = 1;
+  if (eventTarget.id === "left") {
+    for (let c = 0; c < pageState.numberProjects - 2; c++) {
+      projectsSlideshow.appendChild(projects[0]); // n - 2 left moves if right button pressed results in right rotation
+    }
+    projectShiftValue = -1;
   }
-  projects[1].classList.add("focus");
+  let newProjectIndex = pageState.mappingProjects.indexOf(
+    pageState.activeProject
+  );
+  // Code to track the active project and deal with index overflow
+  if (newProjectIndex < 1 && projectShiftValue < 0) {
+    newProjectIndex = pageState.numberProjects - 1;
+  } else if (
+    newProjectIndex >= pageState.numberProjects - 1 &&
+    projectShiftValue > 0
+  ) {
+    newProjectIndex = 0;
+  } else {
+    newProjectIndex += projectShiftValue;
+  }
+  pageState.activeProject = pageState.mappingProjects[newProjectIndex];
+  projects[pageState.projectFocusIndex].classList.add("focus");
 }
 
-// Utils
+// === Utility Functions ===
+
+// TODO: Refactor "getText" and "getNumberOfElementsFromText"
 function getText(textFile, ...textLocation) {
   let failText = `E - Text for ${textLocation} not found!`;
   if (textLocation.length === 0) return failText;
   // Loop over object and extract text by object tree
   let searchText = textFile;
   for (const property of textLocation) {
+    if (!searchText.hasOwnProperty(property)) {
+      break;
+    }
     searchText = searchText[property];
   }
-  return searchText || typeof searchText === String ? searchText : failText;
+  return searchText && typeof searchText === "string" ? searchText : failText;
+}
+
+// Counts number of definitions by using text file
+function getElementsFromText(textFile, ...textLevel) {
+  let numberOfDefinitions = -1;
+  if (!textFile || textLevel.length === 0) return numberOfDefinitions;
+  let objectLevel = textFile;
+  for (const property of textLevel) {
+    if (!objectLevel.hasOwnProperty(property)) {
+      console.error(`The property ${property} does not exists in text file.`);
+      break;
+    }
+    objectLevel = objectLevel[property];
+  }
+  return Object.keys(objectLevel);
 }
