@@ -20,11 +20,11 @@ const progressCount = document.querySelector("#progress");
 const progressBar = document.querySelector("#progress-bar");
 const header = document.querySelector("#header");
 const navigation = document.querySelector(".navigation");
+const aboutContainer = document.querySelector(".about-container");
 const aboutButtons = document.getElementsByClassName("feature-button");
 const aboutButtonsContainer = document.querySelector(".about-buttons");
-const aboutText = document
-  .querySelector(".about-information")
-  .querySelector(".text-element");
+const aboutInformation = document.querySelector(".about-information");
+const aboutText = aboutInformation.querySelector(".text-element");
 const projectsContainer = document.querySelector(".container-projects");
 const projectsSlideshow = document.querySelector(
   ".container-projects-slideshow"
@@ -39,7 +39,7 @@ let pageState = {
   _skipPrequal: false,
   _currPageNumber: this._skipPrequal ? pages.length : 1,
   _currPage: this._skipPrequal ? pages[MAIN] : pages[ON_OFF],
-  _activeAboutText: 1,
+  _activeAboutText: -1,
   _numberProjects: -1,
   _mappingProjects: [],
   _activeProject: "",
@@ -148,6 +148,7 @@ if (!pageState.skipPrequal) {
   pages[MAIN].style.webkitFilter = `blur(0px)`;
   toggleNavigation();
 }
+initializeAboutText();
 initializeProjectSection();
 
 // Main Prequal Function
@@ -271,9 +272,13 @@ function navigationAction(event) {
 }
 
 // == About Text Switching ==
-aboutButtonsContainer.addEventListener("click", aboutButtonsAction);
+function initializeAboutText() {
+  hideAboutText();
+  aboutButtonsContainer.addEventListener("click", displayAboutText);
+  aboutContainer.addEventListener("click", hideAboutTextEvent);
+}
 
-function aboutButtonsAction(event) {
+function displayAboutText(event) {
   event.preventDefault();
   let eventTarget = event.target;
   if (eventTarget.classList.contains("bi")) {
@@ -281,6 +286,7 @@ function aboutButtonsAction(event) {
   }
   console.log(eventTarget);
   if (eventTarget && eventTarget.id) {
+    aboutText.classList.remove("hide");
     Array.prototype.forEach.call(aboutButtons, (btn) => {
       btn.classList.remove("active-button");
     });
@@ -289,12 +295,24 @@ function aboutButtonsAction(event) {
   }
 }
 
-//TODO: Uses this later
-function initializeAboutText() {
-  aboutButtons[pageState.activeAboutText].classList.add("active-button");
-  aboutText.innerHTML = switchAboutText("About", pageState.activeAboutText);
+function hideAboutTextEvent(event) {
+  console.log(event.target.className);
+  if (
+    event.target.className.includes("bi") ||
+    event.target.className.includes("feature-button")
+  ) {
+    return;
+  }
+  event.preventDefault();
+  Array.prototype.forEach.call(aboutButtons, (btn) => {
+    btn.classList.remove("active-button");
+  });
+  hideAboutText();
 }
 
+function hideAboutText() {
+  aboutText.classList.add("hide");
+}
 // === Projects Sections ===
 
 // Initialization project section
