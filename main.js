@@ -40,10 +40,9 @@ let pageState = {
   _currPageNumber: this._skipPrequal ? pages.length : 1,
   _currPage: this._skipPrequal ? pages[MAIN] : pages[ON_OFF],
   _activeAboutText: -1,
+  _projects: [],
   _numberProjects: -1,
-  _mappingProjects: [],
-  _activeProject: "",
-  _projectFocusIndex: 0,
+  _activeProject: -1,
 
   get skipPrequal() {
     return this._skipPrequal;
@@ -57,6 +56,9 @@ let pageState = {
   get activeAboutText() {
     return this._activeAboutText;
   },
+  get projects() {
+    return this._projects;
+  },
   get numberProjects() {
     return this._numberProjects;
   },
@@ -65,9 +67,6 @@ let pageState = {
   },
   get activeProject() {
     return this._activeProject;
-  },
-  get projectFocusIndex() {
-    return this._projectFocusIndex;
   },
   set skipPrequal(value) {
     this._skipPrequal = value;
@@ -85,24 +84,16 @@ let pageState = {
     this._activeAboutText = value;
     this.storeInLocalStorage();
   },
+  set projects(value) {
+    this._projects = value;
+    this.storeInLocalStorage();
+  },
   set numberProjects(value) {
     this._numberProjects = value;
     this.storeInLocalStorage();
   },
-  set mappingProjects(value) {
-    this._mappingProjects = value;
-    this.storeInLocalStorage();
-  },
   set activeProject(value) {
     this._activeProject = value;
-    this.storeInLocalStorage();
-  },
-  set projectFocusIndex(value) {
-    this._projectFocusIndex = value;
-    this.storeInLocalStorage();
-  },
-  addMappingProjects(value) {
-    this._mappingProjects.push(value);
     this.storeInLocalStorage();
   },
   storeInLocalStorage() {
@@ -115,7 +106,6 @@ let pageState = {
       currPage: this.currPage,
       activeAboutText: this.activeAboutText,
       activeProject: this.activeProject,
-      projectFocusIndex: this.projectFocusIdx,
     };
   },
 };
@@ -128,8 +118,7 @@ function loadPageState(state) {
     state.currPageNumber = newState.currPageNumber;
     state.currPage = newState.currPage;
     state.activeAboutText = newState.activeAboutText;
-    state.activeProject = newState.activeProject;
-    state.projectFocusIndex = newState.projectFocusIdx;
+    state.activeProject = parseInt(newState.activeProject);
     return state;
   } catch {
     console.log(`Couldn't load page state`);
@@ -284,9 +273,8 @@ function displayAboutText(event) {
   if (eventTarget.classList.contains("bi")) {
     eventTarget = event.target.parentElement;
   }
-  console.log(eventTarget);
   if (eventTarget && eventTarget.id) {
-    aboutText.classList.remove("hide");
+    aboutText.classList.remove("conceal");
     Array.prototype.forEach.call(aboutButtons, (btn) => {
       btn.classList.remove("active-button");
     });
@@ -296,7 +284,6 @@ function displayAboutText(event) {
 }
 
 function hideAboutTextEvent(event) {
-  console.log(event.target.className);
   if (
     event.target.className.includes("bi") ||
     event.target.className.includes("feature-button")
@@ -311,63 +298,31 @@ function hideAboutTextEvent(event) {
 }
 
 function hideAboutText() {
-  aboutText.classList.add("hide");
+  aboutText.classList.add("conceal");
 }
 // === Projects Sections ===
 
 // Initialization project section
 function initializeProjectSection() {
-  const definedProjects = getElementsFromText(text, "projects");
-  pageState.numberProjects = definedProjects.length;
-  pageState.projectFocusIndex = Math.round(pageState.numberProjects / 2) - 1;
-  // Disable button if only one project
-  if (pageState.numberProjects <= 1) {
-    const containerChildren = projectsContainer.children;
-    for (let idx = 0; idx < containerChildren.length; ++idx) {
-      if (containerChildren[idx].nodeName.toLowerCase() === "button") {
-        containerChildren[idx].classList.add("hide");
-      }
-    }
+  pageState.projects = getElementsFromText(text, "projects");
+  pageState.numberProjects = pageState.projects.length;
+  switch (pageState.numberProjects) {
+    case 1:
+    case 2:
+      pageState.activeProject = 0;
+      break;
+    default:
+      pageState.activeProject = 1;
+      break;
   }
-  if (!pageState.activeProject && pageState.numberProjects > 1) {
-    pageState.activeProject = definedProjects[1];
-  } else if (!pageState.activeProject) {
-    pageState.activeProject = definedProjects[-1];
-  }
-  for (const project of definedProjects) {
-    pageState.addMappingProjects(project);
-    const projectTitle = getText(text, "projects", project, "title");
-    const projectImg = getText(text, "projects", project, "img");
-    const projectInSlideshow = `
-                              <div class="project-element">
-                                <h3>${projectTitle}</h3>
-                                <img src="${projectImg}"/>
-                              </div>
-                             `;
-    projectsSlideshow.insertAdjacentHTML("beforeend", projectInSlideshow);
-  }
+  toggleProjectButtons();
+  renderProjectsInterval(0, Math.min(pageState.numberProjects, MAX_PROJECTS));
   const projectDescription = getText(
     text,
     "projects",
     pageState.activeProject,
     "description"
   );
-  // Code to initialize the correct project section state
-  const idxProjectFocussed = pageState.mappingProjects.indexOf(
-    pageState.activeProject
-  );
-  let projectFocusDifference = pageState.projectFocusIndex - idxProjectFocussed;
-  if (projectFocusDifference > 0) {
-    projectsSlideshow.appendChild(projects[0]);
-    while (projectFocusDifference--) {
-      projectsSlideshow.appendChild(projects[0]);
-    }
-  } else if (projectFocusDifference) {
-    while (projectFocusDifference++) {
-      projectsSlideshow.appendChild(projects[0]);
-    }
-  }
-  projects[pageState.projectFocusIndex].classList.add("focus");
   const projectInformation = `
       <button>"Link to project"</button>
       <div class="text-element">
@@ -375,56 +330,141 @@ function initializeProjectSection() {
       </div>
     `;
   projectText.insertAdjacentHTML("beforeend", projectInformation);
+  projects[pageState.activeProject].classList.add("focus");
+  projectsContainer.addEventListener("click", updateSelectedProject);
+}
+
+function renderProjectsInterval(start, stop) {
+  while (start < stop) {
+    projectsSlideshow.insertAdjacentHTML("beforeend", getProject(start));
+    start++;
+  }
+}
+
+//TODO:
+function toggleProjectButtons() {
+  const containerChildren = projectsContainer.children;
+  if (pageState.activeProject === 0) {
+    containerChildren[0].classList.add("conceal");
+  } else {
+    containerChildren[0].classList.remove("conceal");
+  }
+  if (pageState.activeProject === pageState.numberProjects - 1) {
+    containerChildren[containerChildren.length - 1].classList.add("conceal");
+  } else {
+    containerChildren[containerChildren.length - 1].classList.remove("conceal");
+  }
 }
 
 // Project slidingshow
-projectsContainer.addEventListener("click", updateSelectedProject);
 
 function updateSelectedProject(event) {
   let eventTarget = event.target;
   if (eventTarget.nodeName.toLowerCase() === "button") {
-    slideProjects(eventTarget);
-    projectText.children[0].innerHTML = getText(
-      text,
-      "projects",
-      pageState.activeProject,
-      "link"
+    if (pageState.numberProjects === 2) {
+      handleTwoProjectCase(eventTarget);
+      return;
+    }
+    eventTarget.id === "left" && slideLeft();
+    eventTarget.id === "right" && slideRight();
+    toggleProjectButtons();
+    updateActiveProjectFocus();
+    updateActiveProjectText();
+  }
+}
+
+function slideLeft() {
+  pageState.activeProject -= 1;
+  projectsSlideshow.removeChild(projectsSlideshow.lastElementChild);
+  if (pageState.activeProject === 0) {
+    projectsSlideshow.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="project-element">
+      </div>`
     );
-    projectText.children[1].innerHTML = getText(
-      text,
-      "projects",
-      pageState.activeProject,
-      "description"
+  } else {
+    projectsSlideshow.insertAdjacentHTML(
+      "afterbegin",
+      getProject(pageState.activeProject - 1)
     );
   }
 }
 
-function slideProjects(eventTarget) {
-  projects[pageState.projectFocusIndex].classList.remove("focus");
-  projectsSlideshow.appendChild(projects[0]); // moves the first element to the last slideshow position
-  let projectShiftValue = 1;
-  if (eventTarget.id === "left") {
-    for (let c = 0; c < pageState.numberProjects - 2; c++) {
-      projectsSlideshow.appendChild(projects[0]); // n - 2 left moves if right button pressed results in right rotation
-    }
-    projectShiftValue = -1;
-  }
-  let newProjectIndex = pageState.mappingProjects.indexOf(
-    pageState.activeProject
-  );
-  // Code to track the active project and deal with index overflow
-  if (newProjectIndex < 1 && projectShiftValue < 0) {
-    newProjectIndex = pageState.numberProjects - 1;
-  } else if (
-    newProjectIndex >= pageState.numberProjects - 1 &&
-    projectShiftValue > 0
-  ) {
-    newProjectIndex = 0;
+function slideRight() {
+  pageState.activeProject += 1;
+  projectsSlideshow.removeChild(projectsSlideshow.firstElementChild);
+  if (pageState.activeProject === pageState.numberProjects - 1) {
+    projectsSlideshow.insertAdjacentHTML(
+      "beforeend",
+      `<div class="project-element">
+      </div>`
+    );
   } else {
-    newProjectIndex += projectShiftValue;
+    projectsSlideshow.insertAdjacentHTML(
+      "beforeend",
+      getProject(pageState.activeProject + 1)
+    );
   }
-  pageState.activeProject = pageState.mappingProjects[newProjectIndex];
-  projects[pageState.projectFocusIndex].classList.add("focus");
+}
+
+function updateActiveProjectText() {
+  projectText.children[0].innerHTML = getText(
+    text,
+    "projects",
+    pageState.activeProject,
+    "link"
+  );
+  projectText.children[1].innerHTML = getText(
+    text,
+    "projects",
+    pageState.activeProject,
+    "description"
+  );
+}
+
+function updateActiveProjectFocus() {
+  Array.prototype.forEach.call(projects, (project) => {
+    project.classList.remove("focus");
+  });
+  projects[1].classList.add("focus");
+}
+
+function getProject(project) {
+  const projectTitle = getText(
+    text,
+    "projects",
+    pageState.projects[project],
+    "title"
+  );
+  const projectImg = getText(
+    text,
+    "projects",
+    pageState.projects[project],
+    "img"
+  );
+  return `
+          <div class="project-element">
+            <h3>${projectTitle}</h3>
+            <img src="${projectImg}"/>
+          </div>
+          `;
+}
+
+function handleTwoProjectCase(eventTarget) {
+  // Case: Only two projects
+  if (eventTarget.id === "left") {
+    pageState.activeProject = 0;
+    projects[0].classList.add("focus");
+    projects[1].classList.remove("focus");
+  }
+  if (eventTarget.id === "right") {
+    pageState.activeProject = 1;
+    projects[1].classList.add("focus");
+    projects[0].classList.remove("focus");
+  }
+  toggleProjectButtons();
+  updateActiveProjectText();
+  return;
 }
 
 // === Utility Functions ===

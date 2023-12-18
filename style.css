@@ -54,6 +54,11 @@ section {
   display: none;
 }
 
+/* Conceal class to hide elements without change in position*/
+.conceal {
+  opacity: 0;
+  pointer-events: none;
+}
 /* Relative class to set relative positioning */
 .relative {
   position: relative;
