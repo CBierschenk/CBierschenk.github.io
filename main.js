@@ -317,19 +317,7 @@ function initializeProjectSection() {
   }
   toggleProjectButtons();
   renderProjectsInterval(0, Math.min(pageState.numberProjects, MAX_PROJECTS));
-  const projectDescription = getText(
-    text,
-    "projects",
-    pageState.activeProject,
-    "description"
-  );
-  const projectInformation = `
-      <button>"Link to project"</button>
-      <div class="text-element">
-        <p>${projectDescription}</p>
-      </div>
-    `;
-  projectText.insertAdjacentHTML("beforeend", projectInformation);
+  updateActiveProjectText();
   projects[pageState.activeProject].classList.add("focus");
   projectsContainer.addEventListener("click", updateSelectedProject);
 }
@@ -341,7 +329,6 @@ function renderProjectsInterval(start, stop) {
   }
 }
 
-//TODO:
 function toggleProjectButtons() {
   const containerChildren = projectsContainer.children;
   if (pageState.activeProject === 0) {
@@ -357,7 +344,6 @@ function toggleProjectButtons() {
 }
 
 // Project slidingshow
-
 function updateSelectedProject(event) {
   let eventTarget = event.target;
   if (eventTarget.nodeName.toLowerCase() === "button") {
@@ -408,18 +394,16 @@ function slideRight() {
 }
 
 function updateActiveProjectText() {
-  projectText.children[0].innerHTML = getText(
-    text,
-    "projects",
-    pageState.activeProject,
-    "link"
-  );
-  projectText.children[1].innerHTML = getText(
-    text,
-    "projects",
-    pageState.activeProject,
-    "description"
-  );
+  projectText.innerHTML = "";
+  const activeProjectText = getText(text, "projects", pageState.activeProject);
+  const link = getText(text, "projects", pageState.activeProject)["link"];
+  const projectInformation = `
+      ${link ? `<button>${link}</button>` : ""}
+      <div class="text-element">
+        <p>${activeProjectText["description"]}</p>
+      </div>
+    `;
+  projectText.innerHTML = projectInformation;
 }
 
 function updateActiveProjectFocus() {
@@ -472,16 +456,24 @@ function handleTwoProjectCase(eventTarget) {
 // TODO: Refactor "getText" and "getNumberOfElementsFromText"
 function getText(textFile, ...textLocation) {
   let failText = `E - Text for ${textLocation} not found!`;
+  let success = true;
   if (textLocation.length === 0) return failText;
   // Loop over object and extract text by object tree
   let searchText = textFile;
   for (const property of textLocation) {
     if (!searchText.hasOwnProperty(property)) {
+      success = false;
       break;
     }
     searchText = searchText[property];
   }
-  return searchText && typeof searchText === "string" ? searchText : failText;
+  if (!success) {
+    return failText;
+  }
+  if (searchText.length && !(typeof searchText === "string")) {
+    return searchText.join(" ");
+  }
+  return searchText;
 }
 
 // Counts number of definitions by using text file

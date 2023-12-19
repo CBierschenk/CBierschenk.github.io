@@ -254,13 +254,18 @@ section {
 }
 
 .project-element img {
+  object-fit: cover;
   border-radius: 30%;
   padding: 25px;
+  height: 200px;
+  width: 200px;
 }
 
 .project-element.focus img {
-  width: 100%;
+  object-fit: cover;
   border-radius: 30%;
+  height: 350px;
+  width: 350px;
 }
 .project-element.focus h3 {
   font-size: 1.5em;
@@ -343,6 +348,7 @@ footer {
 }
 
 img.footer {
+  object-fit: cover;
   padding: 5px;
   width: 10%;
   border-radius: 30%;
