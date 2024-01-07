@@ -33,11 +33,14 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* Special styling for title h1 headers */
 h1 {
   font-size: 2em;
+  margin: 10px 0px 100px 20px;
 }
 
 section {
@@ -168,6 +171,7 @@ section {
   display: flex;
   margin: 20px;
   box-shadow: -4px -4px 4px #2f4f4f;
+  border-radius: 15%;
 }
 
 .about-information {
@@ -178,7 +182,7 @@ section {
   margin-top: 75px;
 }
 
-.about-buttons {
+.about-button-container {
   display: flex;
   margin-bottom: 10%;
   justify-content: space-around;
@@ -324,10 +328,9 @@ section {
 footer {
   display: flex;
   justify-content: space-between;
-  position: fixed;
   bottom: 0px;
   width: 100%;
-  background: var(--color-primary-opacity);
+  background: #29292821;
 }
 
 .footer-link-elements {
@@ -343,7 +346,6 @@ footer {
   align-items: left;
   width: 50%;
   padding-left: 10px;
-  border-left: solid 2px lightskyblue;
   font-size: 0.7em;
 }
 

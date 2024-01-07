@@ -21,8 +21,9 @@ const progressBar = document.querySelector("#progress-bar");
 const header = document.querySelector("#header");
 const navigation = document.querySelector(".navigation");
 const aboutContainer = document.querySelector(".about-container");
-const aboutButtons = document.getElementsByClassName("feature-button");
-const aboutButtonsContainer = document.querySelector(".about-buttons");
+// Not needed?
+//const aboutButtons = document.getElementsByClassName("feature-button");
+const aboutButtonsContainer = document.querySelector(".about-button-container");
 const aboutInformation = document.querySelector(".about-information");
 const aboutText = aboutInformation.querySelector(".text-element");
 const projectsContainer = document.querySelector(".container-projects");
@@ -137,6 +138,7 @@ if (!pageState.skipPrequal) {
   pages[MAIN].style.webkitFilter = `blur(0px)`;
   toggleNavigation();
 }
+initializeAboutButtons();
 initializeAboutText();
 initializeProjectSection();
 
@@ -261,6 +263,19 @@ function navigationAction(event) {
 }
 
 // == About Text Switching ==
+function initializeAboutButtons() {
+  const aboutEntries = getElementsFromText(text, "about");
+  for (const entry of aboutEntries) {
+    const buttonBootstrapClass = getText(text, "about", entry, "bootstrap");
+    const buttonHtml = `
+                  <button id="${entry}" class="feature-button">
+                    <i class="${buttonBootstrapClass}"></i>
+                  </button>
+                `;
+    aboutButtonsContainer.insertAdjacentHTML("beforeend", buttonHtml);
+  }
+}
+
 function initializeAboutText() {
   hideAboutText();
   aboutButtonsContainer.addEventListener("click", displayAboutText);
@@ -275,11 +290,11 @@ function displayAboutText(event) {
   }
   if (eventTarget && eventTarget.id) {
     aboutText.classList.remove("conceal");
-    Array.prototype.forEach.call(aboutButtons, (btn) => {
+    Array.prototype.forEach.call(aboutButtonsContainer.children, (btn) => {
       btn.classList.remove("active-button");
     });
     eventTarget.classList.add("active-button");
-    aboutText.innerHTML = getText(text, "about", eventTarget.id);
+    aboutText.innerHTML = getText(text, "about", eventTarget.id, "text");
   }
 }
 
@@ -291,7 +306,7 @@ function hideAboutTextEvent(event) {
     return;
   }
   event.preventDefault();
-  Array.prototype.forEach.call(aboutButtons, (btn) => {
+  Array.prototype.forEach.call(aboutButtonsContainer.children, (btn) => {
     btn.classList.remove("active-button");
   });
   hideAboutText();
