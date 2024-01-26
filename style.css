@@ -40,7 +40,7 @@ body {
 /* Special styling for title h1 headers */
 h1 {
   font-size: 2em;
-  margin: 10px 0px 100px 20px;
+  margin: 10px 0px 00px 20px;
 }
 
 section {
@@ -154,19 +154,20 @@ section {
 /* ==> Wrapper id and children (first, second) to design center seperated section */
 .about-container {
   display: flex;
+  flex-direction: column; /*remove for desctop*/
   justify-content: center;
   margin: 5% 0 5% 0;
 }
 
 .about-gallery {
   display: flex;
-  width: 50%;
+  /* width: 50%; add for desktop*/
   justify-content: space-around;
 }
 
 .about-gallery img {
-  height: 700px;
-  width: 700px;
+  height: 90%; /* find suitable value*/
+  width: 90%; /* find suitable value*/
   object-fit: cover;
   display: flex;
   margin: 20px;
@@ -175,7 +176,7 @@ section {
 }
 
 .about-information {
-  width: 50%;
+  /* width: 50%; add for desktop*/
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -187,7 +188,7 @@ section {
   margin-bottom: 10%;
   justify-content: space-around;
   align-items: center;
-  height: 12vh;
+  /* height: 12vh; */
 }
 
 .text-element {
@@ -196,6 +197,7 @@ section {
   padding: 25px;
   margin: 20px;
   background-color: #f8f9f72c;
+  overflow: hidden;
 }
 
 /* Style feature bottons (bottons to switch text) */
@@ -203,8 +205,8 @@ section {
   background-color: #0699ac79;
   color: #444;
   border: #11111100;
-  height: 7vh;
-  width: 7vh;
+  height: 65px; /* find suitable value*/
+  width: 65px; /* find suitable value*/
   font-size: 1.5em;
   border-radius: 100%;
   cursor: pointer;
@@ -232,6 +234,7 @@ section {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  height: 50%;
 }
 
 .container-projects button {
@@ -254,25 +257,29 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 25%;
+  width: 40%;
+  overflow: hidden;
+  text-align: center;
+  font-size: 0.65em;
 }
 
 .project-element img {
   object-fit: cover;
   border-radius: 30%;
-  padding: 25px;
-  height: 200px;
-  width: 200px;
+  padding: 10px;
+  height: 40%;
+}
+
+.project-element.focus {
+  height: 100%;
+  z-index: 1;
+  overflow: visible;
+  font-size: 1em;
 }
 
 .project-element.focus img {
   object-fit: cover;
   border-radius: 30%;
-  height: 350px;
-  width: 350px;
-}
-.project-element.focus h3 {
-  font-size: 1.5em;
 }
 
 .container-project-information {
