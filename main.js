@@ -11,6 +11,7 @@ const LOADING_INTERVAL = 50;
 const TICKS_TILL_UNBLUR = 10;
 const UNBLUR_TIMEINTERVAL = 100;
 const MAX_PROJECTS = 3;
+const DEFAULT_IMG = "./imgs/dummy.jpeg";
 
 // === DOM-Element Selection ===
 const powerButton = document.querySelector(".power-button");
@@ -21,8 +22,6 @@ const progressBar = document.querySelector("#progress-bar");
 const header = document.querySelector("#header");
 const navigation = document.querySelector(".navigation");
 const aboutContainer = document.querySelector(".about-container");
-// Not needed?
-//const aboutButtons = document.getElementsByClassName("feature-button");
 const aboutButtonsContainer = document.querySelector(".about-button-container");
 const aboutInformation = document.querySelector(".about-information");
 const aboutText = aboutInformation.querySelector(".text-element");
@@ -138,8 +137,7 @@ if (!pageState.skipPrequal) {
   pages[MAIN].style.webkitFilter = `blur(0px)`;
   toggleNavigation();
 }
-initializeAboutButtons();
-initializeAboutText();
+initializeAboutSection();
 initializeProjectSection();
 
 // Main Prequal Function
@@ -262,7 +260,34 @@ function navigationAction(event) {
   }
 }
 
-// == About Text Switching ==
+// == About Section ==
+function initializeAboutSection() {
+  displayAboutGalleryImg();
+  initializeAboutButtons();
+  initializeAboutText();
+}
+
+function displayAboutGalleryImg(initialImg = DEFAULT_IMG) {
+  aboutContainer.insertAdjacentHTML("afterbegin", getAboutGallery(initialImg));
+}
+
+function getAboutGallery(src) {
+  return `
+          <div class="about-gallery">
+            <img src="${src}"/>
+          </div>
+         `;
+}
+
+function switchGalleryImg(imgPath = DEFAULT_IMG) {
+  const currentGallery = document.querySelector(".about-gallery");
+  if (!currentGallery.parentNode) {
+    return;
+  }
+  currentGallery.parentNode.removeChild(currentGallery);
+  displayAboutGalleryImg(imgPath);
+}
+
 function initializeAboutButtons() {
   const aboutEntries = getElementsFromText(text, "about");
   for (const entry of aboutEntries) {
@@ -295,6 +320,7 @@ function displayAboutText(event) {
     });
     eventTarget.classList.add("active-button");
     aboutText.innerHTML = getText(text, "about", eventTarget.id, "text");
+    switchGalleryImg(getText(text, "about", eventTarget.id, "img"));
   }
 }
 
@@ -310,6 +336,7 @@ function hideAboutTextEvent(event) {
     btn.classList.remove("active-button");
   });
   hideAboutText();
+  switchGalleryImg(DEFAULT_IMG);
 }
 
 function hideAboutText() {
