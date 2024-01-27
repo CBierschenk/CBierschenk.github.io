@@ -21,7 +21,6 @@
   overflow: scroll;
 }
 
-/* Body styling */
 body {
   font-size: 22px;
   font-family: "Lucida", monospace;
@@ -33,10 +32,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  width: 100%;
   margin: 0 auto;
 }
-
 /* Special styling for title h1 headers */
 h1 {
   font-size: 2em;
@@ -151,44 +148,40 @@ section {
   scroll-margin: 10vh;
 }
 
-/* ==> Wrapper id and children (first, second) to design center seperated section */
-.about-container {
-  display: flex;
-  flex-direction: column; /*remove for desctop*/
-  justify-content: center;
-  margin: 5% 0 5% 0;
-}
+@media only screen and (max-width: 1024px) {
+  /* ==> Wrapper id and children (first, second) to design center seperated section */
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-.about-gallery {
-  display: flex;
-  /* width: 50%; add for desktop*/
-  justify-content: space-around;
-}
+  .about-gallery {
+    display: flex;
+    justify-content: space-around;
+  }
 
-.about-gallery img {
-  height: 90%; /* find suitable value*/
-  width: 90%; /* find suitable value*/
-  object-fit: cover;
-  display: flex;
-  margin: 20px;
-  box-shadow: -4px -4px 4px #2f4f4f;
-  border-radius: 15%;
-}
+  .about-gallery img {
+    height: 90%;
+    width: 90%;
+    object-fit: cover;
+    display: flex;
+    margin: 20px;
+    box-shadow: -4px -4px 4px #2f4f4f;
+    border-radius: 15%;
+  }
 
-.about-information {
-  /* width: 50%; add for desktop*/
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-top: 75px;
-}
+  .about-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
-.about-button-container {
-  display: flex;
-  margin-bottom: 10%;
-  justify-content: space-around;
-  align-items: center;
-  /* height: 12vh; */
+  .about-button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 
 .text-element {
@@ -228,13 +221,12 @@ section {
 .container-projects {
   display: flex;
   justify-content: space-between;
+  margin-top: 25px;
 }
 
 .container-projects-slideshow {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
-  height: 50%;
+  justify-content: center;
 }
 
 .container-projects button {
@@ -242,7 +234,6 @@ section {
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
-  /* overflow: hidden; */
   outline: none;
   width: 10%;
   font-size: 1.5em;
@@ -256,37 +247,27 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 40%;
   overflow: hidden;
   text-align: center;
-  font-size: 0.65em;
+  font-size: 0.75em;
 }
 
 .project-element img {
   object-fit: cover;
   border-radius: 30%;
-  padding: 10px;
-  height: 40%;
 }
 
 .project-element.focus {
-  height: 100%;
   z-index: 1;
-  overflow: visible;
-  font-size: 1em;
+  overflow: hidden;
+  font-size: 1.25em;
+  width: 100%;
+  max-width: 55%;
 }
 
 .project-element.focus img {
   object-fit: cover;
   border-radius: 30%;
-}
-
-.container-project-information {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .container-project-information {
@@ -456,4 +437,46 @@ img.footer {
   animation-duration: 5s;
   transform-origin: -50% 50%;
   animation-iteration-count: 1;
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 1024px) {
+  /* ==> Wrapper id and children (first, second) to design center seperated section */
+  .about-container {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-evenly;
+  }
+
+  .about-gallery {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+  }
+
+  .about-gallery img {
+    height: 90%;
+    width: 90%;
+    object-fit: cover;
+    display: flex;
+    margin: 20px;
+    box-shadow: -4px -4px 4px #2f4f4f;
+    border-radius: 15%;
+  }
+
+  .about-information {
+    width: 50%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .about-button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 25%;
+    margin-top: 100px;
+  }
 }
