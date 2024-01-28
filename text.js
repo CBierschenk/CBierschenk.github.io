@@ -22,7 +22,7 @@ text = {
   },
   projects: {
     0: {
-      title: "Portfolio webpage",
+      title: "webpage",
       description:
         "<p>How to learn new tools? Yeah, right, by reading and getting used to the tool. The best way to get used to something is by playing around with the learned knowledge. Thus, this project based on exactly that idea. I created my webpage's first version using HTML, CSS and vanilla JavaScript as a starting point. First mastering the basics and later the frameworks like React etc.</p>",
       img: "./imgs/dummy.jpeg",

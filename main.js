@@ -14,6 +14,11 @@ const MAX_PROJECTS = 3;
 const DEFAULT_IMG = "./imgs/dummy.jpeg";
 
 // === DOM-Element Selection ===
+let cssRoot = document.querySelector(":root");
+const cssRootStyles = getComputedStyle(cssRoot);
+const biggerScreenThreshold = cssRootStyles.getPropertyValue(
+  "--bigger-screen-size"
+);
 const powerButton = document.querySelector(".power-button");
 const pages = document.querySelectorAll("div[id*='page']");
 const loadingContainer = pages[1].querySelector(".prequal-container");
@@ -315,6 +320,7 @@ function displayAboutText(event) {
   }
   if (eventTarget && eventTarget.id) {
     aboutText.classList.remove("conceal");
+    aboutText.classList.remove("hide");
     Array.prototype.forEach.call(aboutButtonsContainer.children, (btn) => {
       btn.classList.remove("active-button");
     });
@@ -340,7 +346,11 @@ function hideAboutTextEvent(event) {
 }
 
 function hideAboutText() {
-  aboutText.classList.add("conceal");
+  if (window.innerWidth < biggerScreenThreshold) {
+    aboutText.classList.add("hide");
+  } else {
+    aboutText.classList.add("conceal");
+  }
 }
 // === Projects Sections ===
 

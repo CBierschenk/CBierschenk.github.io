@@ -1,16 +1,20 @@
 /* ==> := section comment, which provide info about subsequent styling*/
 :root {
-  --color-primary: #5ec576;
-  --color-secondary: #ffcb03;
-  --color-tertiary: #ff585f;
-  --color-primary-darker: #66ff66;
-  --color-secondary-darker: #ffbb00;
-  --color-tertiary-darker: #fd424b;
-  --color-primary-opacity: #262525;
-  --color-secondary-opacity: #ffcd0331;
-  --color-tertiary-opacity: #ff58602d;
-  --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
-  --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
+  --primary: linear-gradient(
+    90deg,
+    var(--prequal-font-color) 0%,
+    var(--prequal-primary) 10%,
+    var(--prequal-primary) 90%,
+    var(--prequal-font-color) 100%
+  );
+  --font-color: #b8b7b5;
+  --prequal-primary: #262525;
+  --prequal-primary-transparent: #26252549;
+  --prequal-font-color: #155800;
+  --prequal-font-color-transparent: #15580083;
+  --prequal-red: #b80202;
+  --button-main: #333333;
+  --bigger-screen-size: 1024;
 }
 
 /* Settings for all elements */
@@ -25,11 +29,9 @@ body {
   font-size: 22px;
   font-family: "Lucida", monospace;
   font-weight: 300;
-  color: #000000;
+  color: var(--font-color);
   line-height: 1.2;
-  background-color: white;
-  background-image: linear-gradient(to top left, #bd790b, #0698ac);
-  background-repeat: no-repeat;
+  background-image: var(--primary);
   background-attachment: scroll;
   background-size: cover;
   margin: 0 auto;
@@ -38,6 +40,8 @@ body {
 h1 {
   font-size: 2em;
   margin: 10px 0px 00px 20px;
+  text-align: center;
+  color: var(--prequal-font-color);
 }
 
 section {
@@ -46,7 +50,7 @@ section {
 
 /* Blur class used for js actions */
 .blur {
-  filter: blur(5px);
+  filter: blur(1px);
 }
 
 /* Hide class to hide elements used for js actions */
@@ -66,8 +70,8 @@ section {
 
 /* Prequal class for overlay pages */
 .design-prequal {
-  background-color: var(--color-primary-opacity);
-  color: var(--color-primary-darker);
+  background-color: var(--prequal-primary);
+  color: var(--prequal-font-color);
   text-align: center;
   min-height: 100vh;
   width: 100%;
@@ -85,8 +89,8 @@ section {
 /* Power button styling */
 .power-button {
   outline-offset: 5px;
-  background-color: #f9f7f8;
-  color: red;
+  background-color: var(--font-color);
+  color: var(--prequal-red);
   font-size: 172px;
   border-radius: 15%;
 }
@@ -95,7 +99,7 @@ section {
 #container-progress {
   display: flex;
   width: 75%;
-  background-color: white;
+  background-color: var(--font-color);
   position: relative;
 }
 
@@ -109,7 +113,7 @@ section {
   position: absolute;
   width: 100%;
   margin: auto;
-  color: green;
+  color: var(--prequal-font-color);
 }
 
 /* ==> Navigation bar styling */
@@ -120,7 +124,6 @@ section {
   top: 0px;
   width: 100%;
   font-size: 1em;
-  background-color: #29292821;
   z-index: 1;
 }
 
@@ -132,22 +135,28 @@ section {
 .navi-item {
   padding: 1vh;
   margin: 1vh;
-  border: solid #2b2b2b;
-  border-radius: 10%;
-  background-color: #282929;
+  /* border: solid var(--prequal-primary); */
+  background-color: var(--prequal-primary);
   cursor: pointer;
-  box-shadow: -4px -4px 4px #2f4f4f;
+  box-shadow: -4px -4px 4px var(--prequal-font-color);
 }
 
 .navi-item:hover {
   cursor: pointer;
-  box-shadow: 0 0px 0px #2f4f4f;
+  background-color: var(--prequal-font-color);
+  box-shadow: 0 0px 0px var(--prequal-font-color);
 }
 
 .scroll-top {
   scroll-margin: 10vh;
 }
 
+section {
+  width: 75%;
+  margin: auto;
+}
+
+/* About text for smaller screens*/
 @media only screen and (max-width: 1024px) {
   /* ==> Wrapper id and children (first, second) to design center seperated section */
   .about-container {
@@ -167,8 +176,7 @@ section {
     object-fit: cover;
     display: flex;
     margin: 20px;
-    box-shadow: -4px -4px 4px #2f4f4f;
-    border-radius: 15%;
+    box-shadow: -4px -4px 4px var(--prequal-font-color);
   }
 
   .about-information {
@@ -184,37 +192,72 @@ section {
   }
 }
 
+/* About text for bigger screens*/
+@media only screen and (min-width: 1025px) {
+  /* ==> Wrapper id and children (first, second) to design center seperated section */
+  .about-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .about-gallery {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+  }
+
+  .about-gallery img {
+    height: 90%;
+    width: 90%;
+    object-fit: cover;
+    display: flex;
+    margin: 20px;
+    box-shadow: -4px -4px 4px #2f4f4f;
+  }
+
+  .about-information {
+    width: 50%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .about-button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 25%;
+    margin-top: 100px;
+  }
+}
+
 .text-element {
-  border: solid 2.5px #2f4f4f;
-  border-radius: 25px;
   padding: 25px;
   margin: 20px;
-  background-color: #f8f9f72c;
+  box-shadow: 7px 7px 7px var(--prequal-font-color-transparent);
   overflow: hidden;
 }
 
 /* Style feature bottons (bottons to switch text) */
 .feature-button {
-  background-color: #0699ac79;
-  color: #444;
-  border: #11111100;
-  height: 65px; /* find suitable value*/
-  width: 65px; /* find suitable value*/
+  /* border-radius: 10%; */
+  background-color: var(--button-main);
+  color: var(--font-color);
+  border: var(--button-main);
+  height: 75px; /* find suitable value*/
+  width: 125px; /* find suitable value*/
   font-size: 1.5em;
-  border-radius: 100%;
   cursor: pointer;
-  box-shadow: -2px -2px 4px #2f4f4f;
 }
 
 /* Styling active feature button */
 .feature-button:hover {
-  background-color: #bd790b81;
-  box-shadow: 0 0 1px #2f4f4f;
+  background-color: var(--prequal-font-color-transparent);
 }
 
 .active-button {
-  background-color: #bd790b81;
-  box-shadow: 0px 0px 2px #2f4f4f;
+  background-color: var(--prequal-font-color);
 }
 
 /* ==> Project section styling elements*/
@@ -237,6 +280,7 @@ section {
   outline: none;
   width: 10%;
   font-size: 1.5em;
+  color: var(--prequal-font-color);
 }
 
 .container-projects button:hover {
@@ -254,20 +298,29 @@ section {
 
 .project-element img {
   object-fit: cover;
-  border-radius: 30%;
 }
 
-.project-element.focus {
-  z-index: 1;
-  overflow: hidden;
-  font-size: 1.25em;
-  width: 100%;
-  max-width: 55%;
+/* Project focus for smaller screens*/
+@media only screen and (max-width: 1024px) {
+  .project-element.focus {
+    z-index: 1;
+    overflow: hidden;
+    width: 100vw;
+  }
+}
+
+/* Project focus for smaller screens*/
+@media only screen and (min-width: 1025px) {
+  .project-element.focus {
+    z-index: 1;
+    overflow: hidden;
+    font-size: 1.25em;
+    width: 20vw;
+  }
 }
 
 .project-element.focus img {
   object-fit: cover;
-  border-radius: 30%;
 }
 
 .container-project-information {
@@ -275,41 +328,6 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.archivements-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.archivements-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
-  width: 35%;
-  border: solid 5px black;
-  border-radius: 25px;
-  padding: 25px;
-  margin: 40px;
-  background-color: #f9f7f8;
-}
-
-.archivement {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 20%;
-}
-
-.archivement-img {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
-  width: 40%;
-  padding: 50px;
 }
 
 /* ==> Footer styling */
@@ -437,46 +455,4 @@ img.footer {
   animation-duration: 5s;
   transform-origin: -50% 50%;
   animation-iteration-count: 1;
-}
-
-/* Tablet Styles */
-@media only screen and (min-width: 1024px) {
-  /* ==> Wrapper id and children (first, second) to design center seperated section */
-  .about-container {
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: space-evenly;
-  }
-
-  .about-gallery {
-    display: flex;
-    justify-content: space-around;
-    width: 50%;
-  }
-
-  .about-gallery img {
-    height: 90%;
-    width: 90%;
-    object-fit: cover;
-    display: flex;
-    margin: 20px;
-    box-shadow: -4px -4px 4px #2f4f4f;
-    border-radius: 15%;
-  }
-
-  .about-information {
-    width: 50%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .about-button-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 25%;
-    margin-top: 100px;
-  }
 }
