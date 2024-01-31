@@ -35,17 +35,19 @@ body {
   background-attachment: scroll;
   background-size: cover;
   margin: 0 auto;
+  overflow: hidden;
 }
 /* Special styling for title h1 headers */
 h1 {
-  font-size: 2em;
+  font-size: 3em;
+  font-family: "Press Start 2P";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.google.com/specimen/Press+Start+2P?query=press+)
+    format("woff2");
   margin: 10px 0px 00px 20px;
   text-align: center;
   color: var(--prequal-font-color);
-}
-
-section {
-  margin-bottom: 20px;
 }
 
 /* Blur class used for js actions */
@@ -82,7 +84,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   min-height: 100vh;
 }
 
@@ -98,6 +100,7 @@ section {
 /* ==> Progress bar styling */
 #container-progress {
   display: flex;
+  align-items: center;
   width: 75%;
   background-color: var(--font-color);
   position: relative;
@@ -106,14 +109,14 @@ section {
 #progress-bar {
   width: 0%;
   height: 30px;
-  background-color: var(--color-primary-darker);
+  background-color: var(--prequal-font-color);
 }
 
 #progress {
   position: absolute;
   width: 100%;
   margin: auto;
-  color: var(--prequal-font-color);
+  color: var(--prequal-primary-transparent);
 }
 
 /* ==> Navigation bar styling */
@@ -154,6 +157,7 @@ section {
 section {
   width: 75%;
   margin: auto;
+  margin-bottom: 100px;
 }
 
 /* About text for smaller screens*/
@@ -171,11 +175,11 @@ section {
   }
 
   .about-gallery img {
-    height: 90%;
-    width: 90%;
-    object-fit: cover;
+    height: 500px;
+    block-size: fit-content;
+    object-fit: contain;
     display: flex;
-    margin: 20px;
+    /* margin: 20px; */
     box-shadow: -4px -4px 4px var(--prequal-font-color);
   }
 
@@ -207,12 +211,12 @@ section {
   }
 
   .about-gallery img {
-    height: 90%;
-    width: 90%;
+    block-size: fit-content;
+    height: 500px;
     object-fit: cover;
     display: flex;
     margin: 20px;
-    box-shadow: -4px -4px 4px #2f4f4f;
+    box-shadow: -4px -4px 4px var(--prequal-font-color);
   }
 
   .about-information {
@@ -228,7 +232,7 @@ section {
     justify-content: space-around;
     align-items: center;
     height: 25%;
-    margin-top: 100px;
+    margin-top: 15px;
   }
 }
 
@@ -321,6 +325,8 @@ section {
 
 .project-element.focus img {
   object-fit: cover;
+  border-style: outset;
+  border-color: var(--prequal-font-color-transparent);
 }
 
 .container-project-information {

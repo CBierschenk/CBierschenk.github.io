@@ -9,9 +9,10 @@ const PREQUAL_SKIP = true;
 const LOADING_BAR_TICKS = 100;
 const LOADING_INTERVAL = 50;
 const TICKS_TILL_UNBLUR = 10;
-const UNBLUR_TIMEINTERVAL = 100;
+const UNBLUR_TIMEINTERVAL = 200;
 const MAX_PROJECTS = 3;
-const DEFAULT_IMG = "./imgs/dummy.jpeg";
+const DEFAULT_IMG = "./imgs/default.JPG";
+let webpageString = "";
 
 // === DOM-Element Selection ===
 let cssRoot = document.querySelector(":root");
@@ -22,6 +23,7 @@ const biggerScreenThreshold = cssRootStyles.getPropertyValue(
 const powerButton = document.querySelector(".power-button");
 const pages = document.querySelectorAll("div[id*='page']");
 const loadingContainer = pages[1].querySelector(".prequal-container");
+const loadingText = loadingContainer.children[0];
 const progressCount = document.querySelector("#progress");
 const progressBar = document.querySelector("#progress-bar");
 const header = document.querySelector("#header");
@@ -131,6 +133,8 @@ function loadPageState(state) {
   }
 }
 pageState = loadPageState(pageState);
+initializeAboutSection();
+initializeProjectSection();
 
 // == Prequal Code ==
 if (!pageState.skipPrequal) {
@@ -142,8 +146,6 @@ if (!pageState.skipPrequal) {
   pages[MAIN].style.webkitFilter = `blur(0px)`;
   toggleNavigation();
 }
-initializeAboutSection();
-initializeProjectSection();
 
 // Main Prequal Function
 async function runPrequal() {
@@ -196,9 +198,11 @@ async function runLoadingBarAnimation() {
   return new Promise((resolve) => {
     let loadingTicks = LOADING_BAR_TICKS;
     const loadingInterval = setInterval(() => {
+      progressWebpageString(loadingTicks);
       progressLoadingBar(loadingTicks);
       if (!loadingTicks) {
         clearInterval(loadingInterval);
+        console.log(loadingContainer);
         resolve();
       }
       loadingTicks--;
@@ -209,7 +213,25 @@ async function runLoadingBarAnimation() {
 function progressLoadingBar(loadingTicks) {
   let loadingPercentige = LOADING_BAR_TICKS - loadingTicks;
   progressBar.style.width = `${loadingPercentige}%`;
-  progressCount.innerText = `${loadingPercentige}%`;
+  progressCount.innerText = `Loading - ${loadingPercentige}%`;
+}
+
+function progressWebpageString(loadingTicks) {
+  switch (loadingTicks) {
+    case 25:
+      webpageString = "Who is Constantin?";
+      loadingText.innerHTML = webpageString;
+      break;
+    case 50:
+      webpageString = "Who is";
+      loadingText.innerHTML = webpageString;
+      break;
+    case 75:
+      loadingText.classList.remove("conceal");
+      webpageString = "Who";
+      loadingText.innerHTML = webpageString;
+      break;
+  }
 }
 
 async function unblurMainPage(state) {
