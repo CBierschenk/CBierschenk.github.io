@@ -165,10 +165,6 @@ h1 {
   box-shadow: 0 0px 0px var(--prequal-font-color);
 }
 
-.scroll-top {
-  scroll-margin: 10vh;
-}
-
 section {
   width: 75%;
   margin: auto;
