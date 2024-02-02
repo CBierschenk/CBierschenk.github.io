@@ -23,23 +23,40 @@
   padding: 0;
   box-sizing: border-box;
   overflow: scroll;
+  hyphens: auto;
 }
 
 body {
-  font-size: 22px;
   font-family: "Lucida", monospace;
   font-weight: 300;
   color: var(--font-color);
-  line-height: 1.2;
+  /* line-height: 1.2; */
   background-image: var(--primary);
   background-attachment: scroll;
   background-size: cover;
   margin: 0 auto;
   overflow: hidden;
 }
+
+@media only screen and (max-width: 512px) {
+  body {
+    font-size: 12px;
+  }
+}
+@media only screen and (min-width: 512px) and (max-width: 1024px) {
+  body {
+    font-size: 17px;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  body {
+    font-size: 22px;
+  }
+}
+
 /* Special styling for title h1 headers */
 h1 {
-  font-size: 3em;
+  font-size: 2em;
   font-family: "Press Start 2P";
   font-style: normal;
   font-weight: 400;
@@ -126,7 +143,6 @@ h1 {
   justify-content: center;
   top: 0px;
   width: 100%;
-  font-size: 1em;
   z-index: 1;
 }
 
@@ -138,7 +154,6 @@ h1 {
 .navi-item {
   padding: 1vh;
   margin: 1vh;
-  /* border: solid var(--prequal-primary); */
   background-color: var(--prequal-primary);
   cursor: pointer;
   box-shadow: -4px -4px 4px var(--prequal-font-color);
@@ -157,7 +172,7 @@ h1 {
 section {
   width: 75%;
   margin: auto;
-  margin-bottom: 100px;
+  margin-bottom: 5vh;
 }
 
 /* About text for smaller screens*/
@@ -175,7 +190,7 @@ section {
   }
 
   .about-gallery img {
-    height: 500px;
+    /* height: 350px; */
     block-size: fit-content;
     object-fit: contain;
     display: flex;
@@ -193,6 +208,7 @@ section {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 15px;
   }
 }
 
@@ -212,8 +228,8 @@ section {
 
   .about-gallery img {
     block-size: fit-content;
-    height: 500px;
-    object-fit: cover;
+    height: 90%;
+    object-fit: initial;
     display: flex;
     margin: 20px;
     box-shadow: -4px -4px 4px var(--prequal-font-color);
@@ -221,7 +237,7 @@ section {
 
   .about-information {
     width: 50%;
-    height: 75%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -245,7 +261,6 @@ section {
 
 /* Style feature bottons (bottons to switch text) */
 .feature-button {
-  /* border-radius: 10%; */
   background-color: var(--button-main);
   color: var(--font-color);
   border: var(--button-main);
@@ -268,7 +283,7 @@ section {
 .container-projects {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  /* margin-top: 25px; */
 }
 
 .container-projects-slideshow {
@@ -304,22 +319,29 @@ section {
   object-fit: cover;
 }
 
+.project-element.focus {
+  z-index: 1;
+  overflow: hidden;
+}
+
 /* Project focus for smaller screens*/
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 512px) {
   .project-element.focus {
-    z-index: 1;
-    overflow: hidden;
-    width: 100vw;
+    font-size: 1.25em;
+  }
+}
+
+/* Project focus for smaller screens*/
+@media only screen and (min-width: 513px) and (max-width: 1024px) {
+  .project-element.focus {
+    font-size: 1.5em;
   }
 }
 
 /* Project focus for smaller screens*/
 @media only screen and (min-width: 1025px) {
   .project-element.focus {
-    z-index: 1;
-    overflow: hidden;
-    font-size: 1.25em;
-    width: 20vw;
+    font-size: 2em;
   }
 }
 
