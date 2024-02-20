@@ -30,7 +30,6 @@ body {
   font-family: "Lucida", monospace;
   font-weight: 300;
   color: var(--font-color);
-  /* line-height: 1.2; */
   background-image: var(--primary);
   background-attachment: scroll;
   background-size: cover;
@@ -186,11 +185,9 @@ section {
   }
 
   .about-gallery img {
-    /* height: 350px; */
     block-size: fit-content;
     object-fit: contain;
     display: flex;
-    /* margin: 20px; */
     box-shadow: -4px -4px 4px var(--prequal-font-color);
   }
 
@@ -293,7 +290,7 @@ section {
   border: none;
   cursor: pointer;
   outline: none;
-  width: 10%;
+  min-width: 5%;
   font-size: 1.5em;
   color: var(--prequal-font-color);
 }
@@ -308,7 +305,8 @@ section {
   justify-content: center;
   overflow: hidden;
   text-align: center;
-  font-size: 0.75em;
+  font-size: 1.25vw;
+  max-width: 25%;
 }
 
 .project-element img {
@@ -318,27 +316,8 @@ section {
 .project-element.focus {
   z-index: 1;
   overflow: hidden;
-}
-
-/* Project focus for smaller screens*/
-@media only screen and (max-width: 512px) {
-  .project-element.focus {
-    font-size: 1.25em;
-  }
-}
-
-/* Project focus for smaller screens*/
-@media only screen and (min-width: 513px) and (max-width: 1024px) {
-  .project-element.focus {
-    font-size: 1.5em;
-  }
-}
-
-/* Project focus for smaller screens*/
-@media only screen and (min-width: 1025px) {
-  .project-element.focus {
-    font-size: 2em;
-  }
+  max-width: 35%;
+  font-size: 2vw;
 }
 
 .project-element.focus img {
