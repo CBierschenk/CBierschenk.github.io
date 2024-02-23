@@ -30,6 +30,7 @@ body {
   font-family: "Lucida", monospace;
   font-weight: 300;
   color: var(--font-color);
+  background-color: var(--prequal-primary);
   background-image: var(--primary);
   background-attachment: scroll;
   background-size: cover;
