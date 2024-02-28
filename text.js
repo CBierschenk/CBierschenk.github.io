@@ -23,9 +23,8 @@ text = {
       text: [
         "<h2>Diver</h2>",
         "<p>Scuba diving is a breathtaking feeling and one of my favorite hobbies. I try to scuba dive whenever possible. It opens the door to gorgeous marine life and provides a certain feeling of weightlessness. You will come down and relax underwater. It's one of the major parts for a safe dive. My current certifications are:</p>",
-        "<p><h4>- PADI open water diver,</h4></p>",
+        "<p><h4>- PADI advanced open water diver,</h4></p>",
         "<p><h4>- Drysuite diver,</h4></p>",
-        "<p>and I am working on my PADI advanced open water diver.</p>",
       ],
       img: "./imgs/diveI.png",
       bootstrap: "bi bi-water",
