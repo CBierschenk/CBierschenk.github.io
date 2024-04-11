@@ -269,6 +269,7 @@ document
 if (window.matchMedia("(pointer: coarse)").matches) {
   showNavigation("");
   document.querySelector("#section-1").style.marginTop = "5vh";
+  location.reload();
 } else {
   document
     .querySelector(".navigation")
