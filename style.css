@@ -35,8 +35,9 @@ body {
   background-image: var(--primary);
   background-attachment: scroll;
   background-size: cover;
-  margin: 0 auto;
+  margin: auto;
   overflow: hidden;
+  width: 100%;
 }
 
 @media only screen and (max-width: 512px) {
@@ -189,7 +190,7 @@ section {
 
   .about-gallery img {
     block-size: fit-content;
-    object-fit: contain;
+    object-fit: cover;
     box-shadow: -4px -4px 4px var(--prequal-font-color);
   }
 
