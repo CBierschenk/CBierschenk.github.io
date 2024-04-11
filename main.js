@@ -144,7 +144,13 @@ if (!pageState.skipPrequal) {
   pages[ON_OFF].classList.add("hide");
   pages[MAIN].classList.remove("hide");
   pages[MAIN].style.webkitFilter = `blur(0px)`;
-  toggleNavigation();
+  // verify if touch device is used
+  if (window.matchMedia("(pointer: coarse)").matches) {
+    header.classList.toggle("hide");
+    document.querySelector("#section-1").style.marginTop = "5vh";
+  } else {
+    toggleNavigation();
+  }
 }
 
 // Main Prequal Function
@@ -265,18 +271,12 @@ function showNavigation(event) {
 document
   .querySelector(".navi-links")
   .addEventListener("click", navigationAction);
-
-if (window.matchMedia("(pointer: coarse)").matches) {
-  showNavigation("");
-  document.querySelector("#section-1").style.marginTop = "5vh";
-} else {
-  document
-    .querySelector(".navigation")
-    .addEventListener("mouseenter", showNavigation);
-  document
-    .querySelector(".navigation")
-    .addEventListener("mouseleave", showNavigation);
-}
+document
+  .querySelector(".navigation")
+  .addEventListener("mouseenter", showNavigation);
+document
+  .querySelector(".navigation")
+  .addEventListener("mouseleave", showNavigation);
 function navigationAction(event) {
   event.preventDefault();
   let eventTarget = event.target;
