@@ -190,7 +190,8 @@ section {
 
   .about-gallery img {
     block-size: fit-content;
-    object-fit: cover;
+    height: 90%;
+    object-fit: initial;
     box-shadow: -4px -4px 4px var(--prequal-font-color);
   }
 
