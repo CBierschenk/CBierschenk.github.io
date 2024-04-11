@@ -266,13 +266,17 @@ document
   .querySelector(".navi-links")
   .addEventListener("click", navigationAction);
 
-document
-  .querySelector(".navigation")
-  .addEventListener("mouseenter", showNavigation);
-document
-  .querySelector(".navigation")
-  .addEventListener("mouseleave", showNavigation);
-
+if (window.matchMedia("(pointer: coarse)").matches) {
+  showNavigation("");
+  document.querySelector("#section-1").style.marginTop = "5vh";
+} else {
+  document
+    .querySelector(".navigation")
+    .addEventListener("mouseenter", showNavigation);
+  document
+    .querySelector(".navigation")
+    .addEventListener("mouseleave", showNavigation);
+}
 function navigationAction(event) {
   event.preventDefault();
   let eventTarget = event.target;
