@@ -184,12 +184,12 @@ section {
   .about-gallery {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
   }
 
   .about-gallery img {
     block-size: fit-content;
     object-fit: contain;
-    display: flex;
     box-shadow: -4px -4px 4px var(--prequal-font-color);
   }
 
