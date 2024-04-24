@@ -359,7 +359,11 @@ function displayAboutText(event) {
 function hideAboutTextEvent(event) {
   if (
     event.target.className.includes("bi") ||
-    event.target.className.includes("feature-button")
+    event.target.className.includes("feature-button") ||
+    event.explicitOriginalTarget.classList.contains("text-element") ||
+    event.explicitOriginalTarget.parentElement.classList.contains(
+      "text-element"
+    )
   ) {
     return;
   }
