@@ -147,7 +147,7 @@ if (!pageState.skipPrequal) {
   // verify if touch device is used
   if (window.matchMedia("(pointer: coarse)").matches) {
     header.classList.toggle("hide");
-    document.querySelector("#section-1").style.marginTop = "5vh";
+    aboutContainer.style.marginTop = "5vh";
   } else {
     toggleNavigation();
   }
