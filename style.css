@@ -1,12 +1,16 @@
 /* ==> := section comment, which provide info about subsequent styling*/
 :root {
-  --primary: linear-gradient(
+  --primary-front: linear-gradient(
     90deg,
-    var(--prequal-font-color) 0%,
-    var(--prequal-primary) 10%,
-    var(--prequal-primary) 90%,
-    var(--prequal-font-color) 100%
+    rgba(48, 110, 49, 1) 0%,
+    rgba(35, 75, 36, 1) 0.5%,
+    rgba(34, 74, 35, 1) 25%,
+    rgba(32, 65, 33, 1) 50%,
+    rgba(34, 74, 35, 1) 75%,
+    rgba(35, 75, 36, 1) 99.5%,
+    rgba(48, 110, 49, 1) 100%
   );
+  --primary-background: #1a381b;
   --font-color: #b8b7b5;
   --prequal-primary: #262525;
   --prequal-primary-transparent: #26252549;
@@ -58,7 +62,7 @@ body {
 
 /* Special styling for title h1 headers */
 h1 {
-  font-size: 2em;
+  font-size: 3em;
   font-family: "Press Start 2P";
   font-style: normal;
   font-weight: 400;
@@ -66,7 +70,7 @@ h1 {
     format("woff2");
   margin: 10px 0px 00px 20px;
   text-align: center;
-  color: var(--prequal-font-color);
+  color: var(--font-color);
 }
 
 /* Blur class used for js actions */
@@ -167,10 +171,21 @@ h1 {
   box-shadow: 0 0px 0px var(--prequal-font-color);
 }
 
+#page-3 {
+  background-image: linear-gradient(
+    90deg,
+    rgba(26, 56, 27, 1) 7%,
+    rgba(48, 110, 49, 1) 30%,
+    rgba(48, 110, 49, 1) 70%,
+    rgba(26, 56, 27, 1) 93%
+  );
+}
+
 section {
   width: 75%;
   margin: auto;
-  margin-bottom: 5vh;
+  padding-bottom: 5vh;
+  background-image: var(--primary-front);
 }
 
 /* About text for smaller screens*/
@@ -192,7 +207,8 @@ section {
     block-size: fit-content;
     height: 90%;
     object-fit: initial;
-    box-shadow: -4px -4px 4px var(--prequal-font-color);
+    border-style: outset;
+    border-color: var(--prequal-font-color-transparent);
   }
 
   .about-information {
@@ -229,7 +245,8 @@ section {
     object-fit: initial;
     display: flex;
     margin: 20px;
-    box-shadow: -4px -4px 4px var(--prequal-font-color);
+    border-style: outset;
+    border-color: var(--prequal-font-color-transparent);
   }
 
   .about-information {
@@ -252,8 +269,10 @@ section {
 .text-element {
   padding: 25px;
   margin: 20px;
-  box-shadow: 7px 7px 7px var(--prequal-font-color-transparent);
+  border-style: outset;
+  border-color: var(--prequal-font-color-transparent);
   overflow: hidden;
+  background-color: var(--primary-background);
 }
 
 /* Style feature bottons (bottons to switch text) */
@@ -265,6 +284,8 @@ section {
   width: 125px; /* find suitable value*/
   font-size: 1.5em;
   cursor: pointer;
+  border-style: outset;
+  border-color: var(--prequal-font-color-transparent);
 }
 
 /* Styling active feature button */
