@@ -44,6 +44,7 @@ const projectText = document.querySelector(".container-project-information");
 // change default values?
 let pageState = {
   _skipPrequal: false,
+  _reload: true,
   _currPageNumber: this._skipPrequal ? pages.length : 1,
   _currPage: this._skipPrequal ? pages[MAIN] : pages[ON_OFF],
   _activeAboutText: -1,
@@ -53,6 +54,9 @@ let pageState = {
 
   get skipPrequal() {
     return this._skipPrequal;
+  },
+  get relead() {
+    return this._reload;
   },
   get currPageNumber() {
     return this._currPageNumber;
@@ -77,6 +81,10 @@ let pageState = {
   },
   set skipPrequal(value) {
     this._skipPrequal = value;
+    this.storeInLocalStorage();
+  },
+  set reload(value) {
+    this._reload = value;
     this.storeInLocalStorage();
   },
   set currPageNumber(value) {
@@ -109,6 +117,7 @@ let pageState = {
   toJSON() {
     return {
       skipPrequal: this.skipPrequal,
+      reload: this.reload,
       currPageNumber: this.currPageNumber,
       currPage: this.currPage,
       activeAboutText: this.activeAboutText,
@@ -147,7 +156,11 @@ if (!pageState.skipPrequal) {
   // verify if touch device is used
   if (window.matchMedia("(pointer: coarse)").matches) {
     header.classList.toggle("hide");
-    aboutContainer.style.marginTop = "5vh";
+    aboutContainer.style.paddingTop = "5vh";
+    if (pageState.reload) {
+      pageState.reload = false;
+      window.reload();
+    }
   } else {
     toggleNavigation();
   }
