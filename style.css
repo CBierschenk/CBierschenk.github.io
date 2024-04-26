@@ -1,20 +1,11 @@
 /* ==> := section comment, which provide info about subsequent styling*/
 :root {
-  --primary-front: linear-gradient(
-    90deg,
-    rgba(48, 110, 49, 1) 0%,
-    rgba(35, 75, 36, 1) 0.5%,
-    rgba(34, 74, 35, 1) 25%,
-    rgba(32, 65, 33, 1) 50%,
-    rgba(34, 74, 35, 1) 75%,
-    rgba(35, 75, 36, 1) 99.5%,
-    rgba(48, 110, 49, 1) 100%
-  );
+  --primary-front: #1a1f18;
   --primary-background: #1a381b;
   --font-color: #b8b7b5;
   --prequal-primary: #262525;
   --prequal-primary-transparent: #26252549;
-  --prequal-font-color: #155800;
+  --prequal-font-color: #1d401e;
   --prequal-font-color-transparent: #15580083;
   --prequal-red: #b80202;
   --button-main: #333333;
@@ -33,15 +24,29 @@
 
 body {
   font-family: "Lucida", monospace;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--font-color);
   background-color: var(--prequal-primary);
-  background-image: var(--primary);
+  background-image: var(--primary-background);
   background-attachment: scroll;
   background-size: cover;
   margin: auto;
   overflow: hidden;
   width: 100%;
+}
+
+h1 {
+  text-align: center;
+  color: var(--prequal-font-color);
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+section {
+  padding-bottom: 25px;
 }
 
 @media only screen and (max-width: 512px) {
@@ -58,19 +63,6 @@ body {
   body {
     font-size: 22px;
   }
-}
-
-/* Special styling for title h1 headers */
-h1 {
-  font-size: 3em;
-  font-family: "Press Start 2P";
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.google.com/specimen/Press+Start+2P?query=press+)
-    format("woff2");
-  margin: 10px 0px 00px 20px;
-  text-align: center;
-  color: var(--font-color);
 }
 
 /* Blur class used for js actions */
@@ -181,11 +173,13 @@ h1 {
   );
 }
 
-section {
+.content {
   width: 75%;
   margin: auto;
   padding-bottom: 5vh;
-  background-image: var(--primary-front);
+  background-color: var(--primary-front);
+  box-shadow: inset 0 0 0 1px #155800, inset 0 0 0 2px #215711,
+    inset 0 0 0 3px #304629, inset 0 0 0 4px #353b33;
 }
 
 /* About text for smaller screens*/
@@ -195,6 +189,8 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 90%;
+    margin: auto;
   }
 
   .about-gallery {
@@ -219,7 +215,7 @@ section {
 
   .about-button-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 15px;
   }
@@ -247,6 +243,7 @@ section {
     margin: 20px;
     border-style: outset;
     border-color: var(--prequal-font-color-transparent);
+    border-width: 1px;
   }
 
   .about-information {
@@ -268,11 +265,7 @@ section {
 
 .text-element {
   padding: 25px;
-  margin: 20px;
-  border-style: outset;
-  border-color: var(--prequal-font-color-transparent);
   overflow: hidden;
-  background-color: var(--primary-background);
 }
 
 /* Style feature bottons (bottons to switch text) */
@@ -286,6 +279,7 @@ section {
   cursor: pointer;
   border-style: outset;
   border-color: var(--prequal-font-color-transparent);
+  border-width: 1px;
 }
 
 /* Styling active feature button */
@@ -330,7 +324,6 @@ section {
   justify-content: center;
   overflow: hidden;
   text-align: center;
-  font-size: 1.25vw;
   max-width: 25%;
 }
 
@@ -349,6 +342,7 @@ section {
   object-fit: cover;
   border-style: outset;
   border-color: var(--prequal-font-color-transparent);
+  border-width: 1px;
 }
 
 .container-project-information {
@@ -356,6 +350,8 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 90%;
+  margin: auto;
 }
 
 /* ==> Footer styling */

@@ -523,7 +523,7 @@ function getProject(project) {
   );
   return `
           <div class="project-element">
-            <h3>${projectTitle}</h3>
+            <h2>${projectTitle}</h2>
             <img src="${projectImg}"/>
           </div>
           `;
