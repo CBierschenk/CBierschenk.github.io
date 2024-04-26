@@ -156,7 +156,7 @@ if (!pageState.skipPrequal) {
   // verify if touch device is used
   if (window.matchMedia("(pointer: coarse)").matches) {
     header.classList.toggle("hide");
-    aboutContainer.style.paddingTop = "5vh";
+    document.querySelector("#section-1").style.paddingTop = "5vh";
     if (pageState.reload) {
       pageState.reload = false;
       window.reload();
